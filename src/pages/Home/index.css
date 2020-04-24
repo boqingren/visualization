@@ -1,0 +1,13 @@
+.count-widget-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 30px;
+  height: 30px;
+  font-size: 14xp !important;
+}
+
+.count-widget-btn {
+  display: block;
+}
