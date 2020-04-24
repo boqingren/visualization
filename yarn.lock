@@ -1434,6 +1434,11 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
+"@types/history@*":
+  version "4.7.5"
+  resolved "https://registry.npm.taobao.org/@types/history/download/@types/history-4.7.5.tgz#527d20ef68571a4af02ed74350164e7a67544860"
+  integrity sha1-Un0g72hXGkrwLtdDUBZOemdUSGA=
+
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0":
   version "2.0.1"
   resolved "https://registry.npm.taobao.org/@types/istanbul-lib-coverage/download/@types/istanbul-lib-coverage-2.0.1.tgz#42995b446db9a48a11a07ec083499a860e9138ff"
@@ -1501,6 +1506,23 @@
   resolved "https://registry.npm.taobao.org/@types/react-dom/download/@types/react-dom-16.9.6.tgz#9e7f83d90566521cc2083be2277c6712dcaf754c"
   integrity sha1-nn+D2QVmUhzCCDviJ3xnEtyvdUw=
   dependencies:
+    "@types/react" "*"
+
+"@types/react-router-dom@^5.1.4":
+  version "5.1.4"
+  resolved "https://registry.npm.taobao.org/@types/react-router-dom/download/@types/react-router-dom-5.1.4.tgz#8d3e0306df74af301cc896309e7d4758f1a4bf71"
+  integrity sha1-jT4DBt90rzAcyJYwnn1HWPGkv3E=
+  dependencies:
+    "@types/history" "*"
+    "@types/react" "*"
+    "@types/react-router" "*"
+
+"@types/react-router@*":
+  version "5.1.5"
+  resolved "https://registry.npm.taobao.org/@types/react-router/download/@types/react-router-5.1.5.tgz#7b2f9b7cc3d350e92664c4e38c0ef529286fe628"
+  integrity sha1-ey+bfMPTUOkmZMTjjA71KShv5ig=
+  dependencies:
+    "@types/history" "*"
     "@types/react" "*"
 
 "@types/react@*", "@types/react@^16.9.0":

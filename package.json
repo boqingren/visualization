@@ -24,25 +24,50 @@
   },
   "eslintConfig": {
     "extends": "react-app",
-    "indent": ["error", 2],
-    "eol-last": ["error", "never"],
-    "comma-dangle": ["error", "never"],
-    "quotes": ["error", "double", {
-      "allowTemplateLiterals": true
-    }],
-    "semi": ["error", "always"],
-    "semi-spacing": ["error", {
-      "before": false,
-      "after": true
-    }],
-    "space-before-function-paren": ["error", {
-      "anonymous": "always",
-      "named": "never",
-      "asyncArrow": "always"
-    }],
-    "space-infix-ops": ["error", {
-      "int32Hint": true
-    }]
+    "indent": [
+      "error",
+      2
+    ],
+    "eol-last": [
+      "error",
+      "never"
+    ],
+    "comma-dangle": [
+      "error",
+      "never"
+    ],
+    "quotes": [
+      "error",
+      "double",
+      {
+        "allowTemplateLiterals": true
+      }
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "semi-spacing": [
+      "error",
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    "space-before-function-paren": [
+      "error",
+      {
+        "anonymous": "always",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ],
+    "space-infix-ops": [
+      "error",
+      {
+        "int32Hint": true
+      }
+    ]
   },
   "browserslist": {
     "production": [
@@ -55,5 +80,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-router-dom": "^5.1.4"
   }
 }
