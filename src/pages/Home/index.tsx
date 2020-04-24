@@ -20,6 +20,8 @@ const Home = React.memo(() => {
     </section>
   ), [ count, handleClick ]);
 
+  console.log("render home page...");
+  
   return (
     <section className="home-page-container">
       <h1 className="home-page-title">
