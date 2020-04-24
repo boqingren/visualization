@@ -1,12 +1,10 @@
 import React from "react";
 
-export type routeComponent = React.LazyExoticComponent<React.MemoExoticComponent<() => JSX.Element>>;
-
 export interface IRoute {
   readonly path: string;
   readonly text: string;
   readonly isRoot: boolean;
-  readonly component: routeComponent;
+  readonly component: any;
 };
 
 const routes: Array<IRoute> = [{

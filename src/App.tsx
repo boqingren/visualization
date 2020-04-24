@@ -1,11 +1,10 @@
 import React, { Suspense } from "react";
 import { HashRouter, Switch, Route, Link, useLocation } from "react-router-dom";
 import classnames from "classnames";
-import routes, { IRoute, routeComponent } from "./routes";
-import "./styles/App.css"
+import routes, { IRoute } from "./routes";
+import "./styles/App.css";
 
 const Router = HashRouter;
-const getRoute: (path: string, component: routeComponent) => JSX.Element = (path, component) => <Route key={path} path={path} component={component} exact />
 
 const Fallback: React.FC<any> = React.memo(() => (
   <section className="app-route-fallback-container">
@@ -13,7 +12,7 @@ const Fallback: React.FC<any> = React.memo(() => (
   </section>
 ));
 
-const Links: React.FC<any> = React.memo((props) => (
+const Links: React.FC<any> = React.memo(() => (
   <section className="app-route-links-container">
     {routes.map((item: IRoute) => {
       const location = useLocation();
@@ -31,7 +30,7 @@ const Links: React.FC<any> = React.memo((props) => (
 
 const Routes: React.FC<any> = React.memo(() => (
   <section className="app-route-views-container">
-    {routes.map((item: IRoute) => getRoute(item.path, item.component))}
+    {routes.map((item: IRoute) => <Route key={item.path} path={item.path} component={item.component} exact />)}
   </section>
 ));
 
