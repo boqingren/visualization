@@ -1,10 +1,11 @@
 import React, { Suspense } from "react";
-import { HashRouter, Switch, Route, Link } from "react-router-dom";
+import { HashRouter, Switch, Route, Link, useLocation } from "react-router-dom";
+import classnames from "classnames";
 import routes, { IRoute, routeComponent } from "./routes";
 import "./styles/App.css"
 
 const Router = HashRouter;
-const getRoute: (path: string, component: routeComponent) => JSX.Element = (path, component) => <Route path={path} component={component} exact />
+const getRoute: (path: string, component: routeComponent) => JSX.Element = (path, component) => <Route key={path} path={path} component={component} exact />
 
 const Fallback: React.FC<any> = React.memo(() => (
   <section className="app-route-fallback-container">
@@ -12,13 +13,19 @@ const Fallback: React.FC<any> = React.memo(() => (
   </section>
 ));
 
-const Links: React.FC<any> = React.memo(() => (
+const Links: React.FC<any> = React.memo((props) => (
   <section className="app-route-links-container">
-    {routes.map((item: IRoute) => item.isRoot? null: (
-      <Link className="app-route-links-item btn btn-link" to={item.path}>
+    {routes.map((item: IRoute) => {
+      const location = useLocation();
+      const isActive = item.path === location.pathname;
+      const customCss = isActive? "btn-light": "btn-link";
+      const className = classnames(["app-route-links-item", "btn", customCss]);
+      return item.isRoot? null: (
+        <Link key={item.path} className={className} to={item.path}>
         {item.text}
       </Link>
-    ))}
+      )
+    })}
   </section>
 ));
 
@@ -33,16 +40,14 @@ const RouterWithLayout: React.FC<any> = React.memo(() => (
     <section className="app-route-layout-container">
       <Links />
       <Switch>
-        <Routes />
+        <Suspense fallback={<Fallback />}>
+          <Routes />
+        </Suspense>
       </Switch>
     </section>
   </Router>
 ));
 
-const App: React.FC<any> = React.memo(() => (
-  <Suspense fallback={<Fallback />}>
-    <RouterWithLayout />
-  </Suspense>
-));
+const App: React.FC<any> = React.memo(() => <RouterWithLayout />);
 
 export default App;
