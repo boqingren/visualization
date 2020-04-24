@@ -1,0 +1,28 @@
+.app-route-layout-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+}
+
+.app-route-links-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 20px;
+  width: 200px;
+  height: 100%;
+}
+
+.app-route-links-item {
+  width: 100%;
+  text-align: start !important;
+}
+
+.app-route-views-container {
+  flex: 1;
+  padding: 26px 32px;
+  height: 100%;
+}
