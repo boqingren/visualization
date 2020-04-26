@@ -1,0 +1,1 @@
+export const baseUrl = "https://www.fastmock.site/mock/15041c4dca7ca5ec42168c088f9b2c10";

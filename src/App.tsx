@@ -2,15 +2,10 @@ import React, { Suspense } from "react";
 import { HashRouter, Switch, Route, Link, useLocation } from "react-router-dom";
 import classnames from "classnames";
 import routes, { IRoute } from "./routes";
+import DataLoading from "./components/DataLoading";
 import "./styles/App.css";
 
 const Router = HashRouter;
-
-const Fallback: React.FC<any> = React.memo(() => (
-  <section className="app-route-fallback-container">
-    <div>Loading...</div>
-  </section>
-));
 
 const Links: React.FC<any> = React.memo(() => (
   <section className="app-route-links-container">
@@ -39,7 +34,7 @@ const RouterWithLayout: React.FC<any> = React.memo(() => (
     <section className="app-route-layout-container">
       <Links />
       <Switch>
-        <Suspense fallback={<Fallback />}>
+        <Suspense fallback={<DataLoading />}>
           <Routes />
         </Suspense>
       </Switch>
