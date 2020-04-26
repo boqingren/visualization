@@ -1,5 +1,7 @@
-import * as service from "./service";
+import * as http from "./http";
+import * as api from "./api";
 
 export {
-  service
+  http,
+  api
 };

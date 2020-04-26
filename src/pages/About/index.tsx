@@ -11,21 +11,20 @@ const About = React.memo(() => {
   }));
 
   const list = useMemo(() => {
-    const isSuccessful = data && data.status === 200 && data.data.data && data.data.code === 200;
-    console.log("list data:", data);
-    return !isSuccessful? null: (
+    const hasData = data && data.length > 0;
+    return !hasData? null: (
       <ul className="about-page-list-container">
-        {data.data.data.map((item: IGetTestListParams) => (
-          <li className="about-page-list-item-container">
-            <div className="about-page-list-item-id">
+        {data.map((item: IGetTestListParams) => (
+          <li key={item.id} className="about-page-list-item-container">
+            <span className="about-page-list-item-id">
               {item.id}
-            </div>
-            <div className="about-page-list-item-name">
+            </span>
+            <span className="about-page-list-item-name">
               {item.name}
-            </div>
-            <div className="about-page-list-item-age">
+            </span>
+            <span className="about-page-list-item-age">
               {item.age}
-            </div>
+            </span>
           </li>
         ))}
       </ul>

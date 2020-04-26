@@ -1,3 +1,3 @@
-import { baseUrl } from "./service";
+import { baseUrl } from "./http";
 
-export const getTestList = `${baseUrl}/visualization/test/list`;
+export const getTestListApi = `${baseUrl}/visualization/test/list`;
