@@ -11,6 +11,17 @@ axios.interceptors.response.use((response: any) => {
   return Promise.resolve(error);
 });
 
+const getRequestOpts = (url: string, opts: any) => ({
+  url,
+  params: opts.params? opts.params: null,
+  data: opts.data? opts.data: null,
+  method: opts.method,
+  headers: !opts.headers? HTTP_HEADERS: {
+    ...HTTP_HEADERS,
+    ...opts.headers
+  }
+});
+
 const getExceptionStatus = (response: any) => {
   const is401 = response.code === 401;
   const exceptionStatus = is401? HTTP_STATUS.NO_ACCESS: HTTP_STATUS.NOT_FOUND;
@@ -44,16 +55,7 @@ const handleHttpException = (error: any, retrieveResult: any, retrieveError: any
 };
 
 const request = (url: string, opts: any) => new Promise((retrieveResult, retrieveError) => axios
-  .request({
-    url,
-    params: opts.params? opts.params: null,
-    data: opts.data? opts.data: null,
-    method: opts.method,
-    headers: !opts.headers? HTTP_HEADERS: {
-      ...HTTP_HEADERS,
-      ...opts.headers
-    }
-  })
+  .request(getRequestOpts(url, opts))
   .then(response => checkStatus(response))
   .then(result => checkCode(result, url, opts, retrieveResult, retrieveError))
   .catch(error => handleHttpException(error, retrieveResult, retrieveError)));
