@@ -1,8 +1,10 @@
 import React, { useMemo } from "react";
-import { DataLoading, DataError, Table } from "../../components";
+import { Table } from "../../components";
 import { useRequest } from "@umijs/hooks";
-// import { useTable } from "../../hooks";
 import { getTestList } from "../../services/about";
+import { renderUtils } from "../../utils";
+
+const { renderWithUseRequest } = renderUtils;
 
 const About = React.memo(() => {
   const { data, error, loading } = useRequest(() => getTestList({
@@ -32,9 +34,7 @@ const About = React.memo(() => {
       <h1 className="about-page-title">
         About Page.
       </h1>
-      {loading && <DataLoading />}
-      {error && <DataError />}
-      {data  && <Table columns={columns} dataSource={data} />}
+      {renderWithUseRequest(error, loading, <Table columns={columns} dataSource={data} />)}
     </div>
   );
 });

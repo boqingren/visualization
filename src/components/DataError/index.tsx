@@ -6,7 +6,7 @@ const DataError = React.memo(() => {
 
   return (
     <div className="data-error-components-container">
-      Something is error ...
+      something is error ...
     </div>
   );
 });

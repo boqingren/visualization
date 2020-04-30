@@ -6,7 +6,7 @@ const DataLoading = React.memo(() => {
 
   return (
     <div className="loading-loading-components-container">
-      Data is loading...
+      data is loading...
     </div>
   );
 });
