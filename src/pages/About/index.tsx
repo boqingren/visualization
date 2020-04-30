@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { DataLoading, DataError } from "../../components";
 import { useRequest } from "@umijs/hooks";
+// import { useTable } from "../../hooks";
 import { getTestList, IGetTestListParams } from "../../services/about";
 
 const About = React.memo(() => {
