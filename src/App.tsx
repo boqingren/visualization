@@ -1,8 +1,10 @@
 import React, { Suspense } from "react";
 import { HashRouter, Switch, Route, Link, useLocation } from "react-router-dom";
+import { IRoute } from "./types";
 import classnames from "classnames";
-import routes, { IRoute } from "./routes";
+import routes from "./routes";
 import DataLoading from "./components/DataLoading";
+
 import "./styles/App.css";
 
 const Router = HashRouter;

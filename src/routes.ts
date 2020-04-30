@@ -1,11 +1,5 @@
 import React from "react";
-
-export interface IRoute {
-  readonly path: string;
-  readonly text: string;
-  readonly isRoot: boolean;
-  readonly component: any;
-};
+import { IRoute } from "./types";
 
 const routes: Array<IRoute> = [{
   path: "/",
