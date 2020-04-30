@@ -49,3 +49,5 @@ export interface IGetTestListParams {
   name: string;
   age: number;
 };
+
+export type TRenderWithUseRequest = (error: any, loading: any, element: React.ReactElement) => React.ReactElement;
