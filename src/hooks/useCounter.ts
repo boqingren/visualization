@@ -1,8 +1,8 @@
 import { useEffect, useReducer, useCallback } from "react";
 
 const Types = {
-  INCREASE: "increaseCount",
-  RESET: "resetCount"
+  INCREASE_COUNT: "increaseCount",
+  RESET_COUNT: "resetCount"
 };
 
 const initStore = {
@@ -11,9 +11,9 @@ const initStore = {
 
 const reducer = (state: any, action: any) => {	
   switch (action.type) {	
-    case Types.INCREASE:
+    case Types.INCREASE_COUNT:
       return { count: state.count + action.count };
-    case Types.RESET:
+    case Types.RESET_COUNT:
       return { count: 0 };
     default:	
       throw new Error();
@@ -24,11 +24,11 @@ const useCounter = (initState: any = initStore) => {
   const [ state, dispatch ] = useReducer(reducer, initState);
 
   const increaseCount = useCallback((count: number = 1) => {
-    dispatch({ type: Types.INCREASE, count });
+    dispatch({ type: Types.INCREASE_COUNT, count });
   }, [ dispatch ]);
 
   const resetCount = useCallback(() => {
-    dispatch({ type: Types.RESET });
+    dispatch({ type: Types.RESET_COUNT });
   }, [ dispatch ]);
 
   useEffect(() => {
