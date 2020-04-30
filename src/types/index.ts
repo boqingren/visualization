@@ -1,3 +1,5 @@
+import { type } from "os";
+
 export interface IRoute {
   readonly path: string;
   readonly text: string;
@@ -17,3 +19,5 @@ export interface IAction {
 export interface ICounterStore extends IStore {
   count: number;
 };
+
+export type TCounterReducer = (state: ICounterStore, action: IAction) => ICounterStore | never;
