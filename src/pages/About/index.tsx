@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { DataLoading, DataError } from "../../components";
+import { DataLoading, DataError, Table } from "../../components";
 import { useRequest } from "@umijs/hooks";
 // import { useTable } from "../../hooks";
 import { getTestList, IGetTestListParams } from "../../services/about";
@@ -33,12 +33,14 @@ const About = React.memo(() => {
   }, [ data ]);
 
   console.log("render about page...");
+  console.log("about page error:", error);
 
   return (
     <div className="about-page-container">
       <h1 className="about-page-title">
         About Page.
       </h1>
+      <Table />
       {loading && <DataLoading />}
       {error && <DataError />}
       {data  && list}

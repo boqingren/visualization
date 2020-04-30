@@ -31,3 +31,9 @@ export interface IUseCounterResult {
 export type TCounterReducer = (state: ICounterStore, action: IAction) => ICounterStore | never;
 
 export type TUseCounter = (state?: ICounterStore) => IUseCounterResult;
+
+// {
+//   title: $formMessage('adNum',),
+//   dataIndex: 'adId',
+//   key: 'adId',
+// },
