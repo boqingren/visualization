@@ -1,4 +1,9 @@
 import { useEffect, useReducer, useCallback } from "react";
+import { IStore, IAction } from "../types";
+
+interface iStore extends IStore {
+  count: number;
+};
 
 const Types = {
   INCREASE_COUNT: "increaseCount",
@@ -9,10 +14,10 @@ const initStore = {
   count: 0
 };
 
-const reducer = (state: any, action: any) => {	
+const reducer = (state: iStore, action: IAction) => {	
   switch (action.type) {	
     case Types.INCREASE_COUNT:
-      return { count: state.count + action.count };
+      return { count: state.count + action.payload };
     case Types.RESET_COUNT:
       return { count: 0 };
     default:	
@@ -24,7 +29,7 @@ const useCounter = (initState: any = initStore) => {
   const [ state, dispatch ] = useReducer(reducer, initState);
 
   const increaseCount = useCallback((count: number = 1) => {
-    dispatch({ type: Types.INCREASE_COUNT, count });
+    dispatch({ type: Types.INCREASE_COUNT, payload: count });
   }, [ dispatch ]);
 
   const resetCount = useCallback(() => {
