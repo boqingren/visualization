@@ -1,38 +1,31 @@
 import React from "react";
+import { ITableComponentProps } from "../../types";
 import "./index.css";
 
-const Table = React.memo((columns, dataSource) => {
+const Table: React.FC<ITableComponentProps> = React.memo(props => {
+  const { columns, dataSource } = props;
   console.log("render table component...");
   return (
     <section className="table-component-container">
       <table className="table">
         <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            {columns.map((item, index) => {
+              const key = item.key || item.dataIndex || index;
+              return <th key={key} scope="col">{item.title}</th>;
+            })}
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
+          {dataSource.map((item, index) => (
+            <tr key={index}>
+              {Object.keys(item).map((child, idx) => {
+                const key = columns[idx].dataIndex;
+                const renderColumn = columns[idx].render;
+                return <td key={key}>{renderColumn? renderColumn(item[key], item, index): item[key]}</td>;
+              })}
+            </tr>
+          ))}
         </tbody>
       </table>
     </section>

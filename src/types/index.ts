@@ -32,8 +32,20 @@ export type TCounterReducer = (state: ICounterStore, action: IAction) => ICounte
 
 export type TUseCounter = (state?: ICounterStore) => IUseCounterResult;
 
-// {
-//   title: $formMessage('adNum',),
-//   dataIndex: 'adId',
-//   key: 'adId',
-// },
+export interface ITableComponentColumn {
+  title: string | number | React.ReactElement;
+  dataIndex: string;
+  key: string;
+  render?: (text: any, record: ITableComponentColumn, index: number) => string | number | React.ReactElement;
+};
+
+export interface ITableComponentProps {
+  columns: Array<ITableComponentColumn>;
+  dataSource: Array<any>;
+}
+
+export interface IGetTestListParams {
+  id: number;
+  name: string;
+  age: number;
+};
