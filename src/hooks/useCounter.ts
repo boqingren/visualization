@@ -1,8 +1,8 @@
 import { useEffect, useReducer, useCallback } from "react";
 
 const Types = {
-  TICK: "tick",
-  RESET: "reset"
+  INCREASE: "increaseCount",
+  RESET: "resetCount"
 };
 
 const initStore = {
@@ -11,8 +11,8 @@ const initStore = {
 
 const reducer = (state: any, action: any) => {	
   switch (action.type) {	
-    case Types.TICK:
-      return { count: state.count + 1 };
+    case Types.INCREASE:
+      return { count: state.count + action.count };
     case Types.RESET:
       return { count: 0 };
     default:	
@@ -23,29 +23,29 @@ const reducer = (state: any, action: any) => {
 const useCounter = (initState: any = initStore) => {
   const [ state, dispatch ] = useReducer(reducer, initState);
 
-  const tick = useCallback(() => {
-    dispatch({ type: Types.TICK });
+  const increaseCount = useCallback((count: number = 1) => {
+    dispatch({ type: Types.INCREASE, count });
   }, [ dispatch ]);
 
-  const reset = useCallback(() => {
+  const resetCount = useCallback(() => {
     dispatch({ type: Types.RESET });
   }, [ dispatch ]);
 
   useEffect(() => {
     console.log("useEffect before return.");
     const timer = setInterval(() => {
-      tick();
+      increaseCount();
     }, 1000);
     return () => {
       console.log("useEffect return.");
       clearInterval(timer);
     };
-  }, [ tick ]);
+  }, [ increaseCount ]);
 
   return {
     state,
-    reset,
-    tick
+    increaseCount,
+    resetCount
   };
 };
 
