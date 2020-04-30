@@ -1,7 +1,7 @@
 import { useEffect, useReducer, useCallback } from "react";
-import { ICounterStore, TCounterReducer } from "../types";
+import { ITypes, ICounterStore, TCounterReducer, TUseCounter } from "../types";
 
-const Types = {
+const Types: ITypes = {
   INCREASE_COUNT: "increaseCount",
   RESET_COUNT: "resetCount"
 };
@@ -21,7 +21,7 @@ const reducer: TCounterReducer = (state, action) => {
   }	
 };
 
-const useCounter = (initState: ICounterStore = initStore) => {
+const useCounter: TUseCounter = (initState = initStore) => {
   const [ state, dispatch ] = useReducer(reducer, initState);
 
   const increaseCount = useCallback((count: number = 1) => {
