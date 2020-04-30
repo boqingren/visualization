@@ -22,6 +22,11 @@ const routes: Array<IRoute> = [{
   text: "About",
   isRoot: false,
   component: React.lazy(() => import("./pages/About"))
+}, {
+  path: "/hooks",
+  text: "Hooks",
+  isRoot: false,
+  component: React.lazy(() => import("./pages/Hooks"))
 }];
 
 export default routes;

@@ -1,0 +1,19 @@
+import React, { } from "react";
+import { useCounter } from "../../hooks";
+import "./index.css";
+
+const Hooks = React.memo(() => {
+  const { state, reset } = useCounter();
+  console.log("render hooks page...");
+  
+  return (
+    <section className="hooks-page-container">
+      <h1 className="hooks-page-title" onClick={() => reset()}>
+        Hooks Page.
+      </h1>
+      <div>{state.count}</div>
+    </section>
+  );
+});
+
+export default Hooks;
