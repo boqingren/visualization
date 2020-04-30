@@ -39,9 +39,16 @@ export interface ITableComponentColumn {
   render?: (text: any, record: ITableComponentColumn, index: number) => string | number | React.ReactElement;
 };
 
+export interface ITableComponentPagination {
+  total: number;
+  pageNum: number;
+  pageSize: number;
+};
+
 export interface ITableComponentProps {
   columns: Array<ITableComponentColumn>;
   dataSource: Array<any>;
+  pagination: ITableComponentPagination;
 }
 
 export interface IGetTestListParams {
