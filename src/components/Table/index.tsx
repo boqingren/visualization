@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { ITableProps } from "../../types";
 import { ITablePagination } from "../../types";
 import "./index.css";
@@ -14,6 +14,15 @@ const Pagination: React.FC<ITableProps> = React.memo(props => {
   const { pagination } = props;
   const pageCount = getPageCount(pagination);
   const paginationList = Array(pageCount).fill(1).map((item, index) => item + index);
+
+  const handlePageItemLinkClick = useCallback(pageNum => {
+    console.log("Pagination handlePageItemLinkClick pageNum:", pageNum);
+  }, []);
+
+  const handlePreventDefault = useCallback(event => {
+    event.preventDefault();
+  }, []);
+
   return (
     <nav aria-label="Page navigation example">
       <ul className="pagination table-pagination-container">
@@ -23,14 +32,14 @@ const Pagination: React.FC<ITableProps> = React.memo(props => {
           </a>
         </li>
         {paginationList.map(item => (
-          <li className="page-item">
-            <a className="page-link" href="#">
+          <li className="page-item" onClick={() => handlePageItemLinkClick(item)}>
+            <a className="page-link" onClick={handlePreventDefault}>
               {item}
             </a>
           </li>
         ))}
         <li className="page-item">
-          <a className="page-link" aria-label="Next">
+          <a className="page-link" aria-label="Next" onClick={handlePreventDefault}>
             <span aria-hidden="true">&raquo;</span>
           </a>
         </li>
