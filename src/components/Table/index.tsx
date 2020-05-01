@@ -17,12 +17,30 @@ const Pagination: React.FC<ITableProps> = React.memo(props => {
   const isShowEllipsis = paginationList.length > 7;
   const paginationArr = isShowEllipsis? paginationList.slice(0, 7): paginationList;
   const [ current, setCurrent ] = useState(pagination.pageNum);
+  const isFirstPageNum = current === paginationList[0];
+  const isLastPageNum = current === paginationList[paginationList.length - 1];
+  const isShowPrevious = !isFirstPageNum
+  const isShowNext = !isLastPageNum;
+
+  const handlePreviousClick = useCallback(() => {
+    if (isFirstPageNum) return;
+    handlePageItemLinkClick(current - 1);
+  }, [ current, isFirstPageNum ]);
 
   const handlePageItemLinkClick = useCallback(pageNum => {
     if (pageNum === current) return;
     setCurrent(pageNum);
     props.changePage({ pageNum });
   }, [current]);
+
+  const handleEllipsisClick = useCallback(() => {
+
+  }, []);
+
+  const handleNextClick = useCallback(() => {
+    if (isLastPageNum) return;
+    handlePageItemLinkClick(current + 1);
+  }, [ current, isLastPageNum ]);
 
   const handlePreventDefault = useCallback(event => {
     event.preventDefault();
@@ -31,11 +49,13 @@ const Pagination: React.FC<ITableProps> = React.memo(props => {
   return (
     <nav aria-label="Page navigation example">
       <ul className="pagination table-pagination-container">
-        <li className="page-item">
-          <a className="page-link" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
+        {isShowPrevious && (
+          <li className="page-item" onClick={handlePreviousClick}>
+            <a className="page-link" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+        )}
         {paginationArr.map(item => (
           <li key={item} className={classnames(["page-item", { "active-page-item": item === current }])} onClick={() => handlePageItemLinkClick(item)}>
             <a className="page-link" onClick={handlePreventDefault}>
@@ -50,11 +70,13 @@ const Pagination: React.FC<ITableProps> = React.memo(props => {
             </a>
           </li>
         )}
-        <li className="page-item">
-          <a className="page-link" aria-label="Next" onClick={handlePreventDefault}>
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
+        {isShowNext && (
+          <li className="page-item" onClick={handleNextClick}>
+            <a className="page-link" aria-label="Next" onClick={handlePreventDefault}>
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        )}
       </ul>
     </nav>
   );
