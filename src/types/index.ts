@@ -54,6 +54,7 @@ export interface ITableProps {
   columns: Array<ITableColumn>;
   dataSource: Array<any>;
   pagination: ITablePagination;
+  changePage: (payload: ITablePagination) => void;
 }
 
 export interface ITableListItem {

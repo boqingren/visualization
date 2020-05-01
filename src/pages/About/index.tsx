@@ -7,7 +7,6 @@ import { renderUtils } from "../../utils";
 const { renderWithUseRequest } = renderUtils;
 
 const About = React.memo(() => {
-
   const { error, loading, state, changePage } = useTable(getTestList);
   
   const columns = useMemo(() => [{
@@ -36,6 +35,7 @@ const About = React.memo(() => {
           columns={columns}
           dataSource={state.tableList}
           pagination={state.pagination}
+          changePage={changePage}
         />
       ))}
     </div>
