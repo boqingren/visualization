@@ -1,21 +1,36 @@
 import React from "react";
 import { ITableProps } from "../../types";
+import { ITablePagination } from "../../types";
 import "./index.css";
 
-const Pagination = React.memo(props => {
+const getPageCount: (pagination: ITablePagination) => number = pagination => {
+  const amount: number = pagination.total || 0;
+  const size: number = pagination.pageSize || 0;
+  const pageCount = Math.ceil(amount / size);
+  return pageCount;
+};
+
+const Pagination: React.FC<ITableProps> = React.memo(props => {
+  const { pagination } = props;
+  const pageCount = getPageCount(pagination);
+  const paginationList = Array(pageCount).fill(1).map((item, index) => item + index);
   return (
     <nav aria-label="Page navigation example">
       <ul className="pagination table-pagination-container">
         <li className="page-item">
-          <a className="page-link" href="#" aria-label="Previous">
+          <a className="page-link" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
-        <li className="page-item"><a className="page-link" href="#">1</a></li>
-        <li className="page-item"><a className="page-link" href="#">2</a></li>
-        <li className="page-item"><a className="page-link" href="#">3</a></li>
+        {paginationList.map(item => (
+          <li className="page-item">
+            <a className="page-link" href="#">
+              {item}
+            </a>
+          </li>
+        ))}
         <li className="page-item">
-          <a className="page-link" href="#" aria-label="Next">
+          <a className="page-link" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
           </a>
         </li>
@@ -48,7 +63,7 @@ const TableList: React.FC<ITableProps> = React.memo(props => {
         ))}
       </tbody>
     </table>
-);
+  );
 });
 
 const Table: React.FC<ITableProps> = React.memo(props => {
@@ -56,7 +71,7 @@ const Table: React.FC<ITableProps> = React.memo(props => {
   return (
     <section className="table-component-container">
       <TableList {...props} />
-      <Pagination />
+      <Pagination {...props} />
     </section>
   );
 });
