@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from "react";
 import classnames from "classnames";
-import { ITableProps } from "../../types";
-import { ITablePagination } from "../../types";
+import { ITableProps, ITablePagination } from "../../types";
 import "./index.css";
 
 const getPageCount: (pagination: ITablePagination) => number = pagination => {
@@ -15,6 +14,8 @@ const Pagination: React.FC<ITableProps> = React.memo(props => {
   const { pagination } = props;
   const pageCount = getPageCount(pagination);
   const paginationList = Array(pageCount).fill(1).map((item, index) => item + index);
+  const isShowEllipsis = paginationList.length > 7;
+  const paginationArr = isShowEllipsis? paginationList.slice(0, 7): paginationList;
   const [ current, setCurrent ] = useState(pagination.pageNum);
 
   const handlePageItemLinkClick = useCallback(pageNum => {
@@ -35,13 +36,20 @@ const Pagination: React.FC<ITableProps> = React.memo(props => {
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
-        {paginationList.map(item => (
+        {paginationArr.map(item => (
           <li key={item} className={classnames(["page-item", { "active-page-item": item === current }])} onClick={() => handlePageItemLinkClick(item)}>
             <a className="page-link" onClick={handlePreventDefault}>
               {item}
             </a>
           </li>
         ))}
+        {isShowEllipsis && (
+          <li className="page-item">
+            <a className="page-link" aria-label="Next" onClick={handlePreventDefault}>
+              <span aria-hidden="true">...</span>
+            </a>
+          </li>
+        )}
         <li className="page-item">
           <a className="page-link" aria-label="Next" onClick={handlePreventDefault}>
             <span aria-hidden="true">&raquo;</span>
