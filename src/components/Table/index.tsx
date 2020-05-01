@@ -1,8 +1,8 @@
 import React from "react";
-import { ITableComponentProps } from "../../types";
+import { ITableProps } from "../../types";
 import "./index.css";
 
-const Table: React.FC<ITableComponentProps> = React.memo(props => {
+const Table: React.FC<ITableProps> = React.memo(props => {
   const { columns, dataSource } = props;
   console.log("render table component...");
   return (

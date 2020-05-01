@@ -32,29 +32,52 @@ export type TCounterReducer = (state: ICounterStore, action: IAction) => ICounte
 
 export type TUseCounter = (state?: ICounterStore) => IUseCounterResult;
 
-export interface ITableComponentColumn {
+export interface IGetTestListParams {
+  pageNum: number;
+  pageSize?: number;
+};
+
+export interface ITableColumn {
   title: string | number | React.ReactElement;
   dataIndex: string;
   key: string;
-  render?: (text: any, record: ITableComponentColumn, index: number) => string | number | React.ReactElement;
+  render?: (text: any, record: ITableColumn, index: number) => string | number | React.ReactElement;
 };
 
-export interface ITableComponentPagination {
-  total: number;
+export interface ITablePagination {
+  total?: number;
   pageNum: number;
-  pageSize: number;
+  pageSize?: number;
 };
 
-export interface ITableComponentProps {
-  columns: Array<ITableComponentColumn>;
+export interface ITableProps {
+  columns: Array<ITableColumn>;
   dataSource: Array<any>;
-  pagination: ITableComponentPagination;
+  pagination: ITablePagination;
 }
 
-export interface IGetTestListParams {
+export interface ITableListItem {
   id: number;
   name: string;
   age: number;
 };
 
+export interface ITableStore {
+  tableList: Array<ITableListItem>;
+  pagination: ITablePagination;
+};
+
+export interface IUseTableResult {
+  state: ITableStore;
+  error: Error | undefined;
+  loading: boolean;
+  changePage: (payload: ITablePagination) => void;
+}
+
+export type THttpRequest<T> = (params: T) => Promise<any>;
+
+export type TUseTableReducer = (state: ITableStore, action: IAction) => ITableStore | never;
+
 export type TRenderWithUseRequest = (error: any, loading: any, element: React.ReactElement) => React.ReactElement;
+
+export type TUseTable = (httpRequest: THttpRequest<IGetTestListParams>, payload?: ITablePagination) => IUseTableResult;

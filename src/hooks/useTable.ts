@@ -1,6 +1,6 @@
 import { useEffect, useReducer, useCallback } from "react";
 import { useRequest } from "@umijs/hooks";
-import { ITypes } from "../types";
+import { ITypes, ITableStore, TUseTableReducer, ITablePagination, TUseTable } from "../types";
 
 const Types: ITypes = {
   SET_TABLE_LIST: "setTableList",
@@ -8,7 +8,7 @@ const Types: ITypes = {
   CHANGE_PAGE: "changePage"
 };
 
-const initStore = {
+const initStore: ITableStore = {
   tableList: [],
   pagination: {
     total: 0,
@@ -17,7 +17,7 @@ const initStore = {
   }
 };
 
-const reducer = (state: any, action: any) => {	
+const reducer: TUseTableReducer = (state, action) => {	
   switch (action.type) {	
     case Types.SET_TABLE_LIST:
       return {
@@ -46,12 +46,12 @@ const reducer = (state: any, action: any) => {
   }	
 };
 
-const getParams = (state: any, payload: any) => ({
+const getParams: (state: ITableStore, payload: ITablePagination) => ITablePagination = (state, payload) => ({
   pageNum: payload.pageNum || state.pagination.pageNum,
   pageSize: payload.pageSize || state.pagination.pageSize
 });
 
-const useTable = (httpRequest: any, payload: any = {}) => {
+const useTable: TUseTable = (httpRequest, payload = initStore.pagination) => {
 
   const params = getParams(initStore, payload);
 
@@ -87,12 +87,13 @@ const useTable = (httpRequest: any, payload: any = {}) => {
     }
   }, [ data, state.pagination.pageNum, state.pagination.pageSize, dispatch ]);
 
-  const changePage = useCallback((payload: any) => {
+  const changePage = useCallback((payload: ITablePagination) => {
+    const params = getParams(state, payload);
     dispatch({
       type: Types.CHANGE_PAGE,
       payload: {
-        pageNum: payload.pageNum || state.pagination.pageNum,
-        pageSize: payload.pageSize || state.pagination.pageSize
+        pageNum: params.pageNum,
+        pageSize: params.pageSize
       }
     })
   }, [ state.pagination.pageNum, state.pagination.pageSize ]);
@@ -104,6 +105,5 @@ const useTable = (httpRequest: any, payload: any = {}) => {
     changePage
   };
 };
-
 
 export default useTable;
