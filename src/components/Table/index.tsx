@@ -29,7 +29,7 @@ const Table: React.FC<ITableProps> = React.memo(props => {
         </tbody>
       </table>
       <nav aria-label="Page navigation example">
-        <ul className="pagination">
+        <ul className="pagination table-pagination-container">
           <li className="page-item">
             <a className="page-link" href="#" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
