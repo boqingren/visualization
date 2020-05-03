@@ -115,7 +115,7 @@ export interface IRestBtnProps {
 
 export interface IPageLinksProps {
   current: number | undefined;
-  currentSubs: Array<number>;
+  paginationSubs: Array<number>;
   handleClick: (pageNum: number) => void;
 };
 

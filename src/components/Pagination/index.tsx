@@ -9,7 +9,7 @@ const handlePreventDefault: (event: React.MouseEvent<HTMLAnchorElement, MouseEve
 
 const CurrentSubs: React.FC<IPageLinksProps> = React.memo(props => (
   <>
-    {props.currentSubs.map(item => (
+    {props.paginationSubs.map(item => (
       <li key={item} className={classnames(["page-item", { "active-page-item": item === props.current }])} onClick={() => props.handleClick(item)}>
         <a className="page-link" onClick={handlePreventDefault}>
           {item}
@@ -60,7 +60,7 @@ const Pagination: React.FC<ITableProps> = React.memo(props => {
       <ul className="pagination table-pagination-container">
         <PreBtn isShow={state.isShowPreBtn} handleClick={handlePreBtnClick} />
         <PreDots isShow={state.isShowPreDots} handleClick={handlePreDotsClick} />
-        <CurrentSubs current={state.current} currentSubs={state.paginationList} handleClick={handlePageItemLinkClick} />
+        <CurrentSubs current={state.current} paginationSubs={state.paginationSubs} handleClick={handlePageItemLinkClick} />
         <NextDots isShow={state.isShowNextDots} handleClick={handleNextDotsClick} />
         <NextBtn isShow={state.isShowNextBtn} handleClick={handleNextBtnClick} />
       </ul>
