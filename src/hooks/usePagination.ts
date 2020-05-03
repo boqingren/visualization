@@ -203,8 +203,20 @@ const usePagination: TUsePagination = ({ pagination, changePage, setSubPages }) 
   }, [ state.current, state.paginationSubs[0] ]);
 
   const handleNextDotsClick = useCallback(() => {
-
-  }, []);
+    const { current, pageCount, paginationSubs } = state;
+    const distance = (pageCount as number) - paginationSubs[paginationSubs.length - 1];
+    const sliceLength = distance > 3? 3: distance;
+    if (sliceLength <= 0) return;
+    const subSlices = paginationSubs.slice(sliceLength);
+    const nextSubs = Array(sliceLength).fill(0).map((item, index) => subSlices[subSlices.length - 1] + index + 1).filter(Boolean);
+    const newSubs = ([] as Array<number>).concat(subSlices, nextSubs);
+    if (!newSubs.includes(current as number)) handlePageItemLinkClick(newSubs[0]);
+    setSubPages(newSubs);
+    dispatch({
+      type: Types.SET_PAGINATION_SUBS,
+      payload: newSubs
+    });
+  }, [ state.pageCount, state.current, state.paginationSubs[state.paginationSubs.length - 1] ]);
 
   const handlePreBtnClick = useCallback(() => {
     const { current, isFirstPageNum, paginationSubs } = state;
