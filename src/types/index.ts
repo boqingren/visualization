@@ -50,6 +50,7 @@ export interface ITablePagination {
   total?: number;
   pageNum: number;
   pageSize?: number;
+  subPages?: Array<number>;
 };
 
 export interface ITableProps {
@@ -57,6 +58,7 @@ export interface ITableProps {
   dataSource: Array<any>;
   pagination: ITablePagination;
   changePage: (payload: ITablePagination) => void;
+  setSubPages: (paginationSubs: Array<number>) => void;
 }
 
 export interface ITableListItem {
@@ -75,6 +77,7 @@ export interface IUseTableResult {
   error: Error | undefined;
   loading: boolean;
   changePage: (payload: ITablePagination) => void;
+  setSubPages: (paginationSubs: Array<number>) => void;
 }
 
 export type THttpRequest<T> = (params: T) => Promise<any>;
@@ -90,7 +93,6 @@ export interface IPaginationStore {
   current: number | undefined;
   paginationList: Array<number>;
   paginationSubs: Array<number>;
-  currentSubs: Array<number>;
   isFirstPageNum: boolean;
   isLastPageNum: boolean;
   isShowPreDots: boolean;

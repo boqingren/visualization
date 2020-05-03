@@ -8,7 +8,6 @@ const Types: ITypes = {
   SET_PAGINATION_CURRENT: "setPaginationCurrent",
   SET_PAGINATION_LIST: "setPaginationList",
   SET_PAGINATION_SUBS: "setPaginationSubs",
-  SET_CURRENT_SUBS: "setCurrentSubs",
   UPDATE_IS_FIRST_PAGE_NUM: "updateIsFirstPageNum",
   UPDATE_IS_LAST_PAGE_NUM: "updateIsLastPageNum",
   UPDATE_IS_SHOW_PRE_DOTS: "updateIsShowPreDots",
@@ -22,7 +21,6 @@ const initStore: IPaginationStore = {
   current: 1,
   paginationList: [],
   paginationSubs: [],
-  currentSubs: [],
   isFirstPageNum: false,
   isLastPageNum: false,
   isShowPreDots: false,
@@ -57,14 +55,6 @@ const reducer: TUsePaginationReducer = (state, action) => {
       return {
         ...state,
         paginationSubs: [
-          ...action.payload
-        ]
-      };
-    };
-    case Types.SET_CURRENT_SUBS: {
-      return {
-        ...state,
-        currentSubs: [
           ...action.payload
         ]
       };
@@ -111,25 +101,53 @@ const reducer: TUsePaginationReducer = (state, action) => {
   }
 };
 
-const usePagination: TUsePagination = ({ pagination, changePage }) => {
+const usePagination: TUsePagination = ({ pagination, changePage, setSubPages }) => {
   const [ state, dispatch ] = useReducer(reducer, {
     ...initStore,
     pageCount: pagination.total,
-    current: pagination.pageNum
+    current: pagination.pageNum,
+    paginationSubs: pagination.subPages as Array<number>
   });
 
-  const handleShowPreDots = useCallback(() => {
-
-  }, [ state.paginationList, state.paginationSubs ]);
-
   const handleShowNextDots = useCallback(() => {
+    
+  }, [ state.paginationList ]);
 
-  }, [ state.paginationList, state.paginationSubs ]);
+  useEffect(() => {
+    dispatch({
+      type: Types.SET_PAGE_COUNT,
+      payload: pagination.total
+    });
+  }, [ pagination.total ]);
 
-  const handleShowPreBtn = useCallback(() => {
+  useEffect(() => {
+    const paginationList: Array<number> = Array(state.pageCount).fill(1).map((item, index) => item + index);
+    const isOverflow7 = paginationList.length > 7;
+    const paginationSubs = isOverflow7? paginationList.slice(0, 7): paginationList;
+    const isSetSubs = state.paginationSubs.length === 0;
+    dispatch({
+      type: Types.SET_PAGINATION_LIST,
+      payload: paginationList
+    });
+    dispatch({
+      type: Types.SET_PAGINATION_SUBS,
+      payload: isSetSubs? paginationSubs: state.paginationSubs
+    });
+  }, [ state.pageCount, state.paginationSubs[0], state.paginationSubs[state.paginationSubs.length - 1] ]);
+
+  useEffect(() => {
+    const { paginationList, paginationSubs } = state;
+    const distance = paginationSubs[paginationSubs.length - 1] - paginationList[0];
+    const isShowPreDots = distance > 7;
+    dispatch({
+      type: Types.UPDATE_IS_SHOW_PRE_DOTS,
+      payload: isShowPreDots
+    });
+  }, [ state.paginationList[0], state.paginationSubs[state.paginationSubs.length - 1] ]);
+
+  useEffect(() => {
     const { current, paginationList } = state;
     const isFirstPageNum = current === paginationList[0];
-    debugger;
     dispatch({
       type: Types.UPDATE_IS_FIRST_PAGE_NUM,
       payload: isFirstPageNum
@@ -140,10 +158,9 @@ const usePagination: TUsePagination = ({ pagination, changePage }) => {
     });
   }, [ state.current, state.paginationList[0] ]);
 
-  const handleShowNextBtn = useCallback(() => {
+  useEffect(() => {
     const { current, paginationList } = state;
     const isLastPageNum = current === paginationList[paginationList.length - 1];
-    debugger;
     dispatch({
       type: Types.UPDATE_IS_LAST_PAGE_NUM,
       payload: isLastPageNum
@@ -153,34 +170,6 @@ const usePagination: TUsePagination = ({ pagination, changePage }) => {
       payload: !isLastPageNum
     });
   }, [ state.current, state.paginationList[state.paginationList.length - 1] ]);
-
-  useEffect(() => {
-    const amount: number = pagination.total || 0;
-    const size: number = pagination.pageSize || 0;
-    const pageCount: number | never = Math.ceil(amount / size);
-    dispatch({
-      type: Types.SET_PAGE_COUNT,
-      payload: pageCount
-    });
-  }, [ pagination.total, pagination.pageSize ]);
-
-  useEffect(() => {
-    const { pageCount, current } = state;
-    const paginationList: Array<number> = Array(pageCount).fill(1).map((item, index) => item + index);
-    const isOverflow7 = paginationList.length > 7;
-    const paginationSubs = isOverflow7? paginationList.slice(0, 7): paginationList;
-    debugger;
-    dispatch({
-      type: Types.SET_PAGINATION_LIST,
-      payload: paginationList
-    });
-    dispatch({
-      type: Types.SET_PAGINATION_SUBS,
-      payload: paginationSubs
-    });
-    handleShowPreBtn();
-    handleShowNextBtn();
-  }, [ state.pageCount, handleShowPreBtn, handleShowNextBtn ]);
 
   const handlePageItemLinkClick = useCallback(pageNum => {
     if (pageNum === state.current) return;
@@ -192,7 +181,20 @@ const usePagination: TUsePagination = ({ pagination, changePage }) => {
   }, [ state.current ]);
 
   const handlePreDotsClick = useCallback(() => {
+    // const isShowPreDots = sliceLength > 0;
+    // dispatch({
+    //   type: Types.UPDATE_IS_SHOW_PRE_DOTS,
+    //   payload: isShowPreDots
+    // });
 
+    // if (sliceLength <= 0) return;
+    // const subSlices = paginationSubs.slice(0, -sliceLength);
+    // const preSubs = Array(sliceLength).fill(0).map((item, index) => paginationList[0] - index - 1).reverse().filter(item => item !== undefined);
+    // const newSubs = ([] as Array<number>).concat(subSlices, preSubs);
+    // dispatch({
+    //   type: Types.SET_PAGINATION_SUBS,
+    //   payload: newSubs
+    // });
   }, []);
 
   const handleNextDotsClick = useCallback(() => {
@@ -200,14 +202,24 @@ const usePagination: TUsePagination = ({ pagination, changePage }) => {
   }, []);
 
   const handlePreBtnClick = useCallback(() => {
-    if (state.isFirstPageNum || !state.current) return;
-    handlePageItemLinkClick(state.current - 1);
-  }, [ state.current, state.isFirstPageNum ]);
+    const { current, isFirstPageNum, paginationSubs } = state;
+    if (isFirstPageNum || !current) return;
+    handlePageItemLinkClick(current - 1);
+    if ((current as number) === paginationSubs[0]) {
+      const newSubs = ([] as Array<number>).concat(current - 1, paginationSubs.slice(0, -1));
+      setSubPages(newSubs);
+    }
+  }, [ state.current, state.isFirstPageNum, state.paginationSubs[0] ]);
 
   const handleNextBtnClick = useCallback(() => {
-    if (state.isLastPageNum || !state.current) return;
-    handlePageItemLinkClick(state.current + 1);
-  }, [ state.current, state.isLastPageNum ]);
+    const { current, isLastPageNum, paginationSubs } = state;
+    if (isLastPageNum || !current) return;
+    handlePageItemLinkClick(current + 1);
+    if ((current as number) === paginationSubs[paginationSubs.length - 1]) {
+      const newSubs = ([] as Array<number>).concat(paginationSubs.slice(1), current + 1);
+      setSubPages(newSubs);
+    }
+  }, [ state.current, state.isLastPageNum, state.paginationSubs[state.paginationSubs.length - 1] ]);
 
   return {
     state,

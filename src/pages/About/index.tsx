@@ -7,7 +7,7 @@ import { renderUtils } from "../../utils";
 const { renderWithUseRequest } = renderUtils;
 
 const About = React.memo(() => {
-  const { error, loading, state, changePage } = useTable(getTestList);
+  const { error, loading, state, changePage, setSubPages } = useTable(getTestList);
   
   const columns = useMemo(() => [{
     title: "id",
@@ -24,7 +24,6 @@ const About = React.memo(() => {
   }], []);
 
   console.log("render about page...");
-
   return (
     <div className="about-page-container">
       <h1 className="about-page-title" onClick={() => changePage({ pageNum: 2 })}>
@@ -36,6 +35,7 @@ const About = React.memo(() => {
           dataSource={state.tableList}
           pagination={state.pagination}
           changePage={changePage}
+          setSubPages={setSubPages}
         />
       ))}
     </div>

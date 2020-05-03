@@ -5,7 +5,8 @@ import { ITypes, ITableStore, TUseTableReducer, ITablePagination, TUseTable } fr
 const Types: ITypes = {
   SET_TABLE_LIST: "setTableList",
   SET_LIST_TOTAL: "setListTotal",
-  CHANGE_PAGE: "changePage"
+  CHANGE_PAGE: "changePage",
+  SET_SUB_PAGES: "setSubPages"
 };
 
 const initStore: ITableStore = {
@@ -13,7 +14,8 @@ const initStore: ITableStore = {
   pagination: {
     total: 0,
     pageNum: 1,
-    pageSize: 10
+    pageSize: 10,
+    subPages: []
   }
 };
 
@@ -39,6 +41,16 @@ const reducer: TUseTableReducer = (state, action) => {
           ...state.pagination,
           pageNum: action.payload.pageNum,
           pageSize: action.payload.pageSize,
+        }
+      };
+    case Types.SET_SUB_PAGES:
+      return {
+        ...state,
+        pagination: {
+          ...state.pagination,
+          subPages: [
+            ...action.payload
+          ]
         }
       };
     default: 
@@ -76,13 +88,17 @@ const useTable: TUseTable = (httpRequest, payload = initStore.pagination) => {
 
   useEffect(() => {
     if (data) {
+      const { pagination } = state
+      const amount: number = data.total || 0;
+      const size: number = pagination.pageSize || 0;
+      const pageCount: number | never = Math.ceil(amount / size);
       dispatch({
         type: Types.SET_TABLE_LIST,
         payload: data.records
       });
       dispatch({
         type: Types.SET_LIST_TOTAL,
-        payload: data.total
+        payload: pageCount
       });
     }
   }, [ data, state.pagination.pageNum, state.pagination.pageSize, dispatch ]);
@@ -95,14 +111,22 @@ const useTable: TUseTable = (httpRequest, payload = initStore.pagination) => {
         pageNum: params.pageNum,
         pageSize: params.pageSize
       }
-    })
+    });
   }, [ state.pagination.pageNum, state.pagination.pageSize ]);
+
+  const handleSetSubPages = useCallback(paginationSubs => {
+    dispatch({
+      type: Types.SET_SUB_PAGES,
+      payload: paginationSubs
+    });
+  }, []);
 
   return {
     error,
     loading,
     state,
-    changePage
+    changePage,
+    setSubPages: handleSetSubPages
   };
 };
 
