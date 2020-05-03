@@ -108,6 +108,17 @@ export interface IUsePaginationResult {
   handleNextBtnClick: () => void;
 };
 
+export interface IRestBtnProps {
+  isShow: boolean;
+  handleClick: () => void;
+};
+
+export interface IPageLinksProps {
+  current: number | undefined;
+  currentSubs: Array<number>;
+  handleClick: (pageNum: number) => void;
+};
+
 export type TUsePaginationReducer = (state: IPaginationStore, action: IAction) => IPaginationStore | never;
 
 export type TUsePagination = (params: ITableProps) => IUsePaginationResult | never;

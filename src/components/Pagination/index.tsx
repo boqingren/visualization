@@ -1,56 +1,68 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import classnames from "classnames";
 import { usePagination } from "../../hooks";
-import { ITableProps, ITablePagination } from "../../types";
+import { ITableProps, IPageLinksProps, IRestBtnProps } from "../../types";
 import "./index.css";
 
 
+const handlePreventDefault: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void = event => event.preventDefault();
+
+const CurrentSubs: React.FC<IPageLinksProps> = React.memo(props => (
+  <>
+    {props.currentSubs.map(item => (
+      <li key={item} className={classnames(["page-item", { "active-page-item": item === props.current }])} onClick={() => props.handleClick(item)}>
+        <a className="page-link" onClick={handlePreventDefault}>
+          {item}
+        </a>
+      </li>
+    ))}
+  </>
+));
+
+const PreDots: React.FC<IRestBtnProps> = React.memo(props => !props.isShow? null: (
+  <li className="page-item" onClick={props.handleClick}>
+    <a className="page-link" aria-label="Next" onClick={handlePreventDefault}>
+      <span aria-hidden="true">...</span>
+    </a>
+  </li>
+));
+
+const NextDots: React.FC<IRestBtnProps> = React.memo(props => !props.isShow? null: (
+  <li className="page-item" onClick={props.handleClick}>
+    <a className="page-link" aria-label="Next" onClick={handlePreventDefault}>
+      <span aria-hidden="true">...</span>
+    </a>
+  </li>
+));
+
+const PreBtn: React.FC<IRestBtnProps> = React.memo(props => !props.isShow? null: (
+  <li className="page-item" onClick={props.handleClick}>
+    <a className="page-link" aria-label="Previous" onClick={handlePreventDefault}>
+      <span aria-hidden="true">&laquo;</span>
+    </a>
+  </li>
+));
+
+const NextBtn: React.FC<IRestBtnProps> = React.memo(props => !props.isShow? null: (
+  <li className="page-item" onClick={props.handleClick}>
+    <a className="page-link" aria-label="Next" onClick={handlePreventDefault}>
+      <span aria-hidden="true">&raquo;</span>
+    </a>
+  </li>
+));
 
 const Pagination: React.FC<ITableProps> = React.memo(props => {
-  const {
-    state,
-    handlePageItemLinkClick,
-    handlePreBtnClick,
-    handleNextBtnClick
-  } = usePagination(props);
-
+  const { state, handlePageItemLinkClick, handlePreDotsClick, handleNextDotsClick, handlePreBtnClick, handleNextBtnClick } = usePagination(props);
   console.log("Pagination state:", state);
-
-  const handlePreventDefault = useCallback(event => {
-    event.preventDefault();
-  }, []);
 
   return (
     <nav aria-label="Page navigation example">
       <ul className="pagination table-pagination-container">
-        {state.isShowPreBtn && (
-          <li className="page-item" onClick={handlePreBtnClick}>
-            <a className="page-link" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-        )}
-        {state.paginationList.map(item => (
-          <li key={item} className={classnames(["page-item", { "active-page-item": item === state.current }])} onClick={() => handlePageItemLinkClick(item)}>
-            <a className="page-link" onClick={handlePreventDefault}>
-              {item}
-            </a>
-          </li>
-        ))}
-        {state.isShowNextBtn && (
-          <li className="page-item">
-            <a className="page-link" aria-label="Next" onClick={handlePreventDefault}>
-              <span aria-hidden="true">...</span>
-            </a>
-          </li>
-        )}
-        {state.isShowNextBtn && (
-          <li className="page-item" onClick={handleNextBtnClick}>
-            <a className="page-link" aria-label="Next" onClick={handlePreventDefault}>
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        )}
+        <PreBtn isShow={state.isShowPreBtn} handleClick={handlePreBtnClick} />
+        <PreDots isShow={state.isShowPreDots} handleClick={handlePreDotsClick} />
+        <CurrentSubs current={state.current} currentSubs={state.paginationList} handleClick={handlePageItemLinkClick} />
+        <NextDots isShow={state.isShowNextDots} handleClick={handleNextDotsClick} />
+        <NextBtn isShow={state.isShowNextBtn} handleClick={handleNextBtnClick} />
       </ul>
     </nav>
   );
