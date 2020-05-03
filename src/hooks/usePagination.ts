@@ -109,10 +109,6 @@ const usePagination: TUsePagination = ({ pagination, changePage, setSubPages }) 
     paginationSubs: pagination.subPages as Array<number>
   });
 
-  const handleShowNextDots = useCallback(() => {
-    
-  }, [ state.paginationList ]);
-
   useEffect(() => {
     dispatch({
       type: Types.SET_PAGE_COUNT,
@@ -191,21 +187,20 @@ const usePagination: TUsePagination = ({ pagination, changePage, setSubPages }) 
   }, [ state.current ]);
 
   const handlePreDotsClick = useCallback(() => {
-    // const isShowPreDots = sliceLength > 0;
-    // dispatch({
-    //   type: Types.UPDATE_IS_SHOW_PRE_DOTS,
-    //   payload: isShowPreDots
-    // });
-
-    // if (sliceLength <= 0) return;
-    // const subSlices = paginationSubs.slice(0, -sliceLength);
-    // const preSubs = Array(sliceLength).fill(0).map((item, index) => paginationList[0] - index - 1).reverse().filter(item => item !== undefined);
-    // const newSubs = ([] as Array<number>).concat(subSlices, preSubs);
-    // dispatch({
-    //   type: Types.SET_PAGINATION_SUBS,
-    //   payload: newSubs
-    // });
-  }, []);
+    const { current, paginationSubs } = state;
+    const distance = paginationSubs[0] - 1;
+    const sliceLength = distance > 3? 3: distance;
+    if (sliceLength <= 0) return;
+    const subSlices = paginationSubs.reverse().slice(sliceLength).reverse();
+    const preSubs = Array(sliceLength).fill(0).map((item, index) => subSlices[0] - index - 1).reverse().filter(Boolean);
+    const newSubs = ([] as Array<number>).concat(preSubs, subSlices);
+    if (!newSubs.includes(current as number)) handlePageItemLinkClick(newSubs[newSubs.length - 1]);
+    setSubPages(newSubs);
+    dispatch({
+      type: Types.SET_PAGINATION_SUBS,
+      payload: newSubs
+    });
+  }, [ state.current, state.paginationSubs[0] ]);
 
   const handleNextDotsClick = useCallback(() => {
 
