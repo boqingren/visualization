@@ -136,14 +136,24 @@ const usePagination: TUsePagination = ({ pagination, changePage, setSubPages }) 
   }, [ state.pageCount, state.paginationSubs[0], state.paginationSubs[state.paginationSubs.length - 1] ]);
 
   useEffect(() => {
-    const { paginationList, paginationSubs } = state;
-    const distance = paginationSubs[paginationSubs.length - 1] - paginationList[0];
-    const isShowPreDots = distance > 7;
+    const { paginationSubs } = state;
+    const distance = paginationSubs[paginationSubs.length - 1] - 1;
+    const isShowPreDots = distance >= 7;
     dispatch({
       type: Types.UPDATE_IS_SHOW_PRE_DOTS,
       payload: isShowPreDots
     });
-  }, [ state.paginationList[0], state.paginationSubs[state.paginationSubs.length - 1] ]);
+  }, [ state.paginationSubs[state.paginationSubs.length - 1] ]);
+
+  useEffect(() => {
+    const { pageCount, paginationSubs } = state;
+    const distance = (pageCount || 0) - paginationSubs[paginationSubs.length - 1];
+    const isShowNextDots = distance > 0;
+    dispatch({
+      type: Types.UPDATE_IS_SHOW_NEXT_DOTS,
+      payload: isShowNextDots
+    });
+  }, [ state.pageCount, state.paginationSubs[state.paginationSubs.length - 1] ]);
 
   useEffect(() => {
     const { current, paginationList } = state;
