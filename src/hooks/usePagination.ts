@@ -110,8 +110,12 @@ const reducer: TUsePaginationReducer = (state, action) => {
   }
 };
 
-const usePagination: TUsePagination = pagination => {
-  const [ state, dispatch ] = useReducer(reducer, initStore);
+const usePagination: TUsePagination = ({ pagination, changePage }) => {
+  const [ state, dispatch ] = useReducer(reducer, {
+    ...initStore,
+    pageCount: pagination.total,
+    current: pagination.pageNum
+  });
 
   useEffect(() => {
     const amount: number = pagination.total || 0;
@@ -132,28 +136,40 @@ const usePagination: TUsePagination = pagination => {
     });
   }, [ state.pageCount ]);
 
-  const handlePreviousClick = useCallback(() => {
-    if (isFirstPageNum) return;
-    handlePageItemLinkClick(current - 1);
-  }, [ current, isFirstPageNum ]);
-
   const handlePageItemLinkClick = useCallback(pageNum => {
-    if (pageNum === current) return;
-    setCurrent(pageNum);
-    props.changePage({ pageNum });
-  }, [current]);
+    if (pageNum === state.current) return;
+    changePage({ pageNum });
+    dispatch({
+      type: Types.SET_PAGINATION_CURRENT,
+      payload: pageNum
+    });
+  }, [ state.current ]);
 
-  // useEffect(() => {
-  //   const { pageCount } = state;
-  //   const paginationList: Array<number> = Array(pageCount).fill(1).map((item, index) => item + index);
-  //   dispatch({
-  //     type: Types.SET_PAGINATION_LIST,
-  //     payload: paginationList
-  //   });
-  // }, [ state.pageCount ]);
+  const handlePreDotsClick = useCallback(() => {
+
+  }, []);
+
+  const handleNextDotsClick = useCallback(() => {
+
+  }, []);
+
+  const handlePreBtnClick = useCallback(() => {
+    if (state.isFirstPageNum || !state.current) return;
+    handlePageItemLinkClick(state.current - 1);
+  }, [ state.current, state.isFirstPageNum ]);
+
+  const handleNextBtnClick = useCallback(() => {
+    if (state.isLastPageNum || !state.current) return;
+    handlePageItemLinkClick(state.current + 1);
+  }, [ state.current, state.isLastPageNum ]);
 
   return {
-    state
+    state,
+    handlePageItemLinkClick,
+    handlePreDotsClick,
+    handleNextDotsClick,
+    handlePreBtnClick,
+    handleNextBtnClick
   };
 };
 

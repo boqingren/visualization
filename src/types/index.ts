@@ -86,8 +86,8 @@ export type TRenderWithUseRequest = (error: any, loading: any, element: React.Re
 export type TUseTable = (httpRequest: THttpRequest<IGetTestListParams>, payload?: ITablePagination) => IUseTableResult;
 
 export interface IPaginationStore {
-  pageCount: number;
-  current: number;
+  pageCount: number | undefined;
+  current: number | undefined;
   paginationList: Array<number>;
   paginationSubs: Array<number>;
   currentSubs: Array<number>;
@@ -101,8 +101,13 @@ export interface IPaginationStore {
 
 export interface IUsePaginationResult {
   state: IPaginationStore;
+  handlePageItemLinkClick: (pageNum: number) => void;
+  handlePreDotsClick: () => void;
+  handleNextDotsClick: () => void;
+  handlePreBtnClick: () => void;
+  handleNextBtnClick: () => void;
 };
 
 export type TUsePaginationReducer = (state: IPaginationStore, action: IAction) => IPaginationStore | never;
 
-export type TUsePagination = (pagination: ITablePagination) => IUsePaginationResult | never;
+export type TUsePagination = (params: ITableProps) => IUsePaginationResult | never;
