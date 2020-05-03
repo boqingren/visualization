@@ -21,7 +21,7 @@ const CurrentSubs: React.FC<IPageLinksProps> = React.memo(props => (
 
 const PreDots: React.FC<IRestBtnProps> = React.memo(props => !props.isShow? null: (
   <li className="page-item" onClick={props.handleClick}>
-    <a className="page-link" aria-label="Next" onClick={handlePreventDefault}>
+    <a className="page-link" aria-label="Previous" onClick={handlePreventDefault}>
       <span aria-hidden="true">...</span>
     </a>
   </li>

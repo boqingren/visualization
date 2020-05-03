@@ -136,6 +136,16 @@ const usePagination: TUsePagination = ({ pagination, changePage }) => {
     });
   }, [ state.pageCount ]);
 
+  // useEffect(() => {
+  //   const { paginationList } = state;
+  //   const isOverflow7 = paginationList.length > 7;
+  //   const paginationSubs = isOverflow7? paginationList.splice(0, 7): paginationList;
+  //   dispatch({
+  //     type: Types.SET_PAGINATION_SUBS,
+  //     payload: paginationSubs
+  //   });
+  // }, [ state.paginationList.length ]);
+
   const handlePageItemLinkClick = useCallback(pageNum => {
     if (pageNum === state.current) return;
     changePage({ pageNum });
