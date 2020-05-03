@@ -1,3 +1,5 @@
+import { type } from "os";
+
 export interface IRoute {
   readonly path: string;
   readonly text: string;
@@ -82,3 +84,25 @@ export type TUseTableReducer = (state: ITableStore, action: IAction) => ITableSt
 export type TRenderWithUseRequest = (error: any, loading: any, element: React.ReactElement) => React.ReactElement;
 
 export type TUseTable = (httpRequest: THttpRequest<IGetTestListParams>, payload?: ITablePagination) => IUseTableResult;
+
+export interface IPaginationStore {
+  pageCount: number;
+  current: number;
+  paginationList: Array<number>;
+  paginationSubs: Array<number>;
+  currentSubs: Array<number>;
+  isFirstPageNum: boolean;
+  isLastPageNum: boolean;
+  isShowPreDots: boolean;
+  isShowNextDots: boolean;
+  isShowPreBtn: boolean;
+  isShowNextBtn: boolean;
+};
+
+export interface IUsePaginationResult {
+  state: IPaginationStore;
+};
+
+export type TUsePaginationReducer = (state: IPaginationStore, action: IAction) => IPaginationStore | never;
+
+export type TUsePagination = (pagination: ITablePagination) => IUsePaginationResult | never;

@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 import classnames from "classnames";
+import { usePagination } from "../../hooks";
 import { ITableProps, ITablePagination } from "../../types";
 import "./index.css";
 
@@ -12,6 +13,7 @@ const getPageCount: (pagination: ITablePagination) => number = pagination => {
 
 const Pagination: React.FC<ITableProps> = React.memo(props => {
   const { pagination } = props;
+  const { state } = usePagination(pagination);
   const pageCount = getPageCount(pagination);
   const paginationList: Array<number> = Array(pageCount).fill(1).map((item, index) => item + index);
   const isShowEllipsis = paginationList.length > 7;
@@ -23,8 +25,8 @@ const Pagination: React.FC<ITableProps> = React.memo(props => {
   const isShowPrevious = !isFirstPageNum;
   const isShowNext = !isLastPageNum;
 
-  console.log("paginationSubs:", paginationSubs);
-  console.log("paginationSubArr:", paginationSubArr);
+  console.log("Pagination state:", state);
+  // console.log("paginationSubArr:", paginationSubArr);
 
   const handlePreviousClick = useCallback(() => {
     if (isFirstPageNum) return;
