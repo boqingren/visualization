@@ -1,3 +1,9 @@
+.navigation-navigation-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 .table-pagination-container {
   justify-content: flex-end;
 }
@@ -9,4 +15,15 @@
 .active-page-item {
   color: #007bff;
   cursor: pointer;
+}
+
+.navigation-navigation-wrapper .input-group {
+  margin-left: 20px;
+  width: 93.56px;
+}
+
+.navigation-navigation-wrapper .form-control {
+  padding: 0.375rem;
+  text-align: center;
+  outline:none
 }

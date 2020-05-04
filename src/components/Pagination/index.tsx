@@ -51,12 +51,23 @@ const NextBtn: React.FC<IRestBtnProps> = React.memo(props => !props.isShow? null
   </li>
 ));
 
+const JumpInputGroup: React.FC<any> = React.memo(props => {
+  return (
+    <div className="input-group mb-3">
+      <input type="text" className="form-control" aria-label="Amount (to the nearest dollar)" />
+      <div className="input-group-append">
+        <span className="input-group-text">Go</span>
+      </div>
+    </div>
+  );
+});
+
 const Pagination: React.FC<ITableProps> = React.memo(props => {
   const { state, handlePageItemLinkClick, handlePreDotsClick, handleNextDotsClick, handlePreBtnClick, handleNextBtnClick } = usePagination(props);
   console.log("Pagination state:", state);
 
   return (
-    <nav aria-label="Page navigation example">
+    <nav className="navigation-navigation-wrapper" aria-label="navigation navigation wrapper">
       <ul className="pagination table-pagination-container">
         <PreBtn isShow={state.isShowPreBtn} handleClick={handlePreBtnClick} />
         <PreDots isShow={state.isShowPreDots} handleClick={handlePreDotsClick} />
@@ -64,6 +75,7 @@ const Pagination: React.FC<ITableProps> = React.memo(props => {
         <NextDots isShow={state.isShowNextDots} handleClick={handleNextDotsClick} />
         <NextBtn isShow={state.isShowNextBtn} handleClick={handleNextBtnClick} />
       </ul>
+      <JumpInputGroup />
     </nav>
   );
 });
