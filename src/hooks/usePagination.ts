@@ -5,6 +5,7 @@ import { ITypes, IPaginationStore, TUsePagination, TUsePaginationReducer } from 
 const Types: ITypes = {
   SET_PAGE_COUNT: "setPageCount",
   SET_PAGINATION_CURRENT: "setPaginationCurrent",
+  SET_INPUT_VALUE: "setInputValue",
   SET_PAGINATION_LIST: "setPaginationList",
   SET_PAGINATION_SUBS: "setPaginationSubs",
   UPDATE_IS_FIRST_PAGE_NUM: "updateIsFirstPageNum",
@@ -18,6 +19,7 @@ const Types: ITypes = {
 const initStore: IPaginationStore = {
   pageCount: 0,
   current: 1,
+  inputValue: "",
   paginationList: [],
   paginationSubs: [],
   isFirstPageNum: false,
@@ -40,6 +42,12 @@ const reducer: TUsePaginationReducer = (state, action) => {
       return {
         ...state,
         current: action.payload
+      };
+    };
+    case Types.SET_INPUT_VALUE: {
+      return {
+        ...state,
+        inputValue: action.payload
       };
     };
     case Types.SET_PAGINATION_LIST: {
@@ -237,13 +245,37 @@ const usePagination: TUsePagination = ({ pagination, changePage, setSubPages }) 
     }
   }, [ state.current, state.isLastPageNum, state.paginationSubs[state.paginationSubs.length - 1] ]);
 
+  const handleInputValueChange = useCallback(event => {
+    event.persist();
+    const value = event.target.value;
+    const pageNum = value.replace(/[^-\d.]/g,"") || "";
+    dispatch({
+      type: Types.SET_INPUT_VALUE,
+      payload: pageNum > (state.pageCount as number)? state.pageCount: pageNum
+    });
+  }, [ state.pageCount ]);
+
+  const handleJump = useCallback(() => {
+    const pageNum = parseInt(state.inputValue as string);
+    if (typeof pageNum !== "number" && isNaN(pageNum)) return;
+    handlePageItemLinkClick(pageNum);
+    if ((state.pageCount as number) > 7) {
+      const newSubs: Array<number> = (state.pageCount as number) - pageNum <= 7
+        ? Array(state.paginationSubs.length).fill(1).map((item, index) => index).reverse().map(item => (state.pageCount as number) - item)
+        : Array(state.paginationSubs.length).fill(1).map((item, index) => pageNum + index);
+      setSubPages(newSubs);
+    }
+  }, [ state.inputValue, state.paginationSubs.length, state.pageCount ]);
+
   return {
     state,
     handlePageItemLinkClick,
     handlePreDotsClick,
     handleNextDotsClick,
     handlePreBtnClick,
-    handleNextBtnClick
+    handleNextBtnClick,
+    handleInputValueChange,
+    handleJump
   };
 };
 

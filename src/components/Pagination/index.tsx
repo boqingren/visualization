@@ -1,7 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 import { usePagination } from "../../hooks";
-import { ITableProps, IPageLinksProps, IRestBtnProps } from "../../types";
+import { ITableProps, IPageLinksProps, IRestBtnProps, IJumpInputGroupProps } from "../../types";
 import "./index.css";
 
 
@@ -51,19 +51,26 @@ const NextBtn: React.FC<IRestBtnProps> = React.memo(props => !props.isShow? null
   </li>
 ));
 
-const JumpInputGroup: React.FC<any> = React.memo(props => {
-  return (
-    <div className="input-group mb-3">
-      <input type="text" className="form-control" aria-label="Amount (to the nearest dollar)" />
-      <div className="input-group-append">
-        <span className="input-group-text">Go</span>
-      </div>
+const JumpInputGroup: React.FC<IJumpInputGroupProps> = React.memo(props => (
+  <div className="input-group mb-3">
+    <input
+      type="text"
+      className="form-control"
+      aria-label="Amount (to the nearest dollar)"
+      value={props.inputValue}
+      onChange={props.handleInputValueChange}
+      onKeyDown={props.handleJump}
+    />
+    <div className="input-group-append">
+      <span className="input-group-text" onClick={props.handleJump}>
+        Go
+      </span>
     </div>
-  );
-});
+  </div>
+));
 
 const Pagination: React.FC<ITableProps> = React.memo(props => {
-  const { state, handlePageItemLinkClick, handlePreDotsClick, handleNextDotsClick, handlePreBtnClick, handleNextBtnClick } = usePagination(props);
+  const { state, handlePageItemLinkClick, handlePreDotsClick, handleNextDotsClick, handlePreBtnClick, handleNextBtnClick, handleInputValueChange, handleJump } = usePagination(props);
   console.log("Pagination state:", state);
 
   return (
@@ -75,7 +82,7 @@ const Pagination: React.FC<ITableProps> = React.memo(props => {
         <NextDots isShow={state.isShowNextDots} handleClick={handleNextDotsClick} />
         <NextBtn isShow={state.isShowNextBtn} handleClick={handleNextBtnClick} />
       </ul>
-      <JumpInputGroup />
+      <JumpInputGroup inputValue={state.inputValue} handleInputValueChange={handleInputValueChange} handleJump={handleJump} />
     </nav>
   );
 });

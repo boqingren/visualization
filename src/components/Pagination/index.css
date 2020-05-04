@@ -27,3 +27,7 @@
   text-align: center;
   outline:none
 }
+
+.navigation-navigation-wrapper .input-group-append {
+  cursor: pointer;
+}

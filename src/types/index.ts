@@ -91,6 +91,7 @@ export type TUseTable = (httpRequest: THttpRequest<IGetTestListParams>, payload?
 export interface IPaginationStore {
   pageCount: number | undefined;
   current: number | undefined;
+  inputValue: number | string;
   paginationList: Array<number>;
   paginationSubs: Array<number>;
   isFirstPageNum: boolean;
@@ -108,6 +109,8 @@ export interface IUsePaginationResult {
   handleNextDotsClick: () => void;
   handlePreBtnClick: () => void;
   handleNextBtnClick: () => void;
+  handleInputValueChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
+  handleJump: () => void;
 };
 
 export interface IRestBtnProps {
@@ -119,6 +122,12 @@ export interface IPageLinksProps {
   current: number | undefined;
   paginationSubs: Array<number>;
   handleClick: (pageNum: number) => void;
+};
+
+export interface IJumpInputGroupProps {
+  inputValue: number | string;
+  handleInputValueChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
+  handleJump: () => void;
 };
 
 export type TUsePaginationReducer = (state: IPaginationStore, action: IAction) => IPaginationStore | never;
