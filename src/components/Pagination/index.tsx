@@ -59,7 +59,6 @@ const JumpInputGroup: React.FC<IJumpInputGroupProps> = React.memo(props => (
       aria-label="Amount (to the nearest dollar)"
       value={props.inputValue}
       onChange={props.handleInputValueChange}
-      onKeyDown={props.handleJump}
     />
     <div className="input-group-append">
       <span className="input-group-text" onClick={props.handleJump}>

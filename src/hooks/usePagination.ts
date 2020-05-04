@@ -257,7 +257,7 @@ const usePagination: TUsePagination = ({ pagination, changePage, setSubPages }) 
 
   const handleJump = useCallback(() => {
     const pageNum = parseInt(state.inputValue as string);
-    if (typeof pageNum !== "number" && isNaN(pageNum)) return;
+    if (typeof pageNum !== "number" || isNaN(pageNum)) return;
     handlePageItemLinkClick(pageNum);
     if ((state.pageCount as number) > 7) {
       const newSubs: Array<number> = (state.pageCount as number) - pageNum <= 7
