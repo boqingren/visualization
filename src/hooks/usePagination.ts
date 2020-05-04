@@ -1,7 +1,6 @@
 
 import { useEffect, useReducer, useCallback } from "react";
-import { ITypes, IPaginationStore, TUsePagination, TUsePaginationReducer, ITablePagination } from "../types";
-import { type } from "os";
+import { ITypes, IPaginationStore, TUsePagination, TUsePaginationReducer } from "../types";
 
 const Types: ITypes = {
   SET_PAGE_COUNT: "setPageCount",
