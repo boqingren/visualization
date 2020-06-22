@@ -134,23 +134,26 @@ export type TUsePaginationReducer = (state: IPaginationStore, action: IAction) =
 export type TUsePagination = (params: ITableProps) => IUsePaginationResult | never;
 
 export interface IScrollProps {
-
+  id?: string;
+  className?: string;
+  initNum?: number;
+  pageSize?: number;
+  getPageData: (params: IUseScrollResult) => void;
 };
 
 export interface IScrollStore {
-  mescrollId: string;
+  mescrollId?: string | null;
   pageNum: number;
   pageSize: number;
-  mescroll: object | null;
+  mescroll?: object | null;
 };
 
 export interface IUseScrollResult {
-  state: IScrollStore;
   pageNum: number;
   pageSize: number;
   isDown: boolean,
   isUp: boolean,
-  mescroll: object | null;
+  mescroll: object;
 };
 
 export type TUseScrollReducer = (state: IScrollStore, action: IAction) => IScrollStore | never;
