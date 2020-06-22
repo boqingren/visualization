@@ -1,1 +1,5 @@
-export default {};
+const useScroll = () => {
+  return;
+};
+
+export default useScroll;
