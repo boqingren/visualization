@@ -8,7 +8,7 @@ const H5MeScroll = React.memo(() => {
 
   return (
     <div className="h5-mescroll-page-container">
-      <H5Scroll>
+      <H5Scroll getPageData={getPageData}>
         1231
       </H5Scroll>
     </div>
