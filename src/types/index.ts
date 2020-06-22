@@ -1,5 +1,3 @@
-import { type } from "os";
-
 export interface IRoute {
   readonly path: string;
   readonly text: string;
@@ -60,7 +58,7 @@ export interface ITableProps {
   pagination: ITablePagination;
   changePage: (payload: ITablePagination) => void;
   setSubPages: (paginationSubs: Array<number>) => void;
-}
+};
 
 export interface ITableListItem {
   id: number;
@@ -79,7 +77,7 @@ export interface IUseTableResult {
   loading: boolean;
   changePage: (payload: ITablePagination) => void;
   setSubPages: (paginationSubs: Array<number>) => void;
-}
+};
 
 export type THttpRequest<T> = (params: T) => Promise<any>;
 
@@ -134,3 +132,27 @@ export interface IJumpInputGroupProps {
 export type TUsePaginationReducer = (state: IPaginationStore, action: IAction) => IPaginationStore | never;
 
 export type TUsePagination = (params: ITableProps) => IUsePaginationResult | never;
+
+export interface IScrollProps {
+
+};
+
+export interface IScrollStore {
+  mescrollId: string;
+  pageNum: number;
+  pageSize: number;
+  mescroll: object | null;
+};
+
+export interface IUseScrollResult {
+  state: IScrollStore;
+  pageNum: number;
+  pageSize: number;
+  isDown: boolean,
+  isUp: boolean,
+  mescroll: object | null;
+};
+
+export type TUseScrollReducer = (state: IScrollStore, action: IAction) => IScrollStore | never;
+
+export type TUseScroll = (params: ITableProps) => IUseScrollResult | never;
