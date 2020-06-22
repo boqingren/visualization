@@ -1,0 +1,1 @@
+export const MOBILE_RESOLUTION = "(max-width: 599px)";

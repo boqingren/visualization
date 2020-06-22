@@ -8,21 +8,25 @@ const useRoutesWithMedia: () => Array<IRoute> = () => {
   return [{
     path: "/",
     text: isSmallScreen? "H5Home": "Home",
+    isShow: isSmallScreen? false: true,
     isRoot: true,
     component: React.lazy(() => import(`../pages/${isSmallScreen? "H5Home": "Home"}`))
   }, {
     path: "/home",
     text: "Home",
+    isShow: true,
     isRoot: false,
     component: React.lazy(() => import("../pages/Home"))
   }, {
     path: "/about",
     text: "About",
+    isShow: true,
     isRoot: false,
     component: React.lazy(() => import("../pages/About"))
   }, {
     path: "/hooks",
     text: "Hooks",
+    isShow: true,
     isRoot: false,
     component: React.lazy(() => import("../pages/Hooks"))
   }];

@@ -1,45 +1,22 @@
-import React, { useMemo } from "react";
-import { Table } from "../../components";
-import { getTestList } from "../../services/about";
-import { useTable } from "../../hooks";
-import { renderUtils } from "../../utils";
+import React from "react";
+import { Link } from "react-router-dom";
+import { useRoutesWithMedia } from "../../hooks";
+import { IRoute } from "../../types";
+import "./index.css";
 
-const { renderWithUseRequest } = renderUtils;
+const H5Home = React.memo(() => {
+  const routes: Array<IRoute> = useRoutesWithMedia()
+  console.log("render h5 home page...");
 
-const About = React.memo(() => {
-  const { error, loading, state, changePage, setSubPages } = useTable(getTestList);
-  
-  const columns = useMemo(() => [{
-    title: "id",
-    dataIndex: "id",
-    key: "id"
-  }, {
-    title: "name",
-    dataIndex: "name",
-    key: "name"
-  }, {
-    title: "age",
-    dataIndex: "age",
-    key: "age"
-  }], []);
-
-  console.log("render about page...");
   return (
-    <div className="about-page-container">
-      <h1 className="about-page-title" onClick={() => changePage({ pageNum: 2 })}>
-        A99bout Page.
-      </h1>
-      {renderWithUseRequest(error, loading, (
-        <Table
-          columns={columns}
-          dataSource={state.tableList}
-          pagination={state.pagination}
-          changePage={changePage}
-          setSubPages={setSubPages}
-        />
+    <div className="h5-home-page-container">
+      {routes.filter(item => item.isShow).map(item => (
+        <Link key={item.path} className="app-route-h5-links-item" to={item.path}>
+          {item.text}
+        </Link>
       ))}
     </div>
   );
 });
 
-export default About;
+export default H5Home;

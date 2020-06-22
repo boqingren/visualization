@@ -3,6 +3,7 @@ import { type } from "os";
 export interface IRoute {
   readonly path: string;
   readonly text: string;
+  readonly isShow: boolean,
   readonly isRoot: boolean;
   readonly component: any;
 };
