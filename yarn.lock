@@ -973,7 +973,7 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.2.0":
+"@babel/runtime@^7.9.6":
   version "7.10.3"
   resolved "https://registry.npm.taobao.org/@babel/runtime/download/@babel/runtime-7.10.3.tgz#670d002655a7c366540c67f6fd3342cd09500364"
   integrity sha1-Zw0AJlWnw2ZUDGf2/TNCzQlQA2Q=
@@ -8772,12 +8772,12 @@ react-is@^16.12.0, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-i
   resolved "https://registry.npm.taobao.org/react-is/download/react-is-16.13.1.tgz?cache=0&sync_timestamp=1586484609601&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-is%2Fdownload%2Freact-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha1-eJcppNw23imZ3BVt1sHZwYzqVqQ=
 
-react-media@^1.10.0:
-  version "1.10.0"
-  resolved "https://registry.npm.taobao.org/react-media/download/react-media-1.10.0.tgz#7b0c5fe8ac55a53ce31b5249db3aaf8a22ff7703"
-  integrity sha1-ewxf6KxVpTzjG1JJ2zqviiL/dwM=
+react-media@^2.0.0-rc.1:
+  version "2.0.0-rc.1"
+  resolved "https://registry.npm.taobao.org/react-media/download/react-media-2.0.0-rc.1.tgz#1a8ed86ddb7f79fd1c70516e825179eb497adf9c"
+  integrity sha1-Go7Ybdt/ef0ccFFuglF560l635w=
   dependencies:
-    "@babel/runtime" "^7.2.0"
+    "@babel/runtime" "^7.9.6"
     invariant "^2.2.2"
     json2mq "^0.2.0"
     prop-types "^15.5.10"

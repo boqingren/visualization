@@ -1,4 +1,4 @@
-.app-route-layout-container {
+.app-route-pc-layout-container {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -6,7 +6,7 @@
   height: 100%;
 }
 
-.app-route-links-container {
+.app-route-h5-links-container {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -17,7 +17,7 @@
   height: 100%;
 }
 
-.app-route-links-item {
+.app-route-pc-links-item {
   width: 100%;
   text-align: start !important;
 }
