@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useMemo } from "react";
 import "./index.css";
 
-const Home = React.memo(() => {
+const PCHome = React.memo(() => {
   const [ count, setCount ] = useState(0);
 
   const handleClick = useCallback(() => {
@@ -20,16 +20,16 @@ const Home = React.memo(() => {
     </section>
   ), [ count, handleClick ]);
 
-  console.log("render home page...");
+  console.log("render pc home page...");
   
   return (
-    <section className="home-page-container">
-      <h1 className="home-page-title">
-        Home Page.
+    <section className="pc-home-page-container">
+      <h1 className="pc-home-title">
+        PC Home Page.
       </h1>
       {countWidget}
     </section>
   );
 });
 
-export default Home;
+export default PCHome;

@@ -4,10 +4,10 @@ import { IRoute } from "../types";
 // 公共路由配置
 export const COMMON_ROUTES_CONFIG: Array<IRoute> = [{
   path: "/home",
-  text: "Home",
+  text: "Hoem",
   isShow: true,
   isRoot: false,
-  component: React.lazy(() => import("../pages/Home"))
+  component: React.lazy(() => import("../pages/PCHome"))
 }, {
   path: "/about",
   text: "About",
@@ -25,10 +25,10 @@ export const COMMON_ROUTES_CONFIG: Array<IRoute> = [{
 // PC 路由配置
 export const PC_ROUTES_CONFIG: Array<IRoute> = [{
   path: "/",
-  text: "Home",
+  text: "PCHome",
   isShow: true,
   isRoot: true,
-  component: React.lazy(() => import("../pages/Home"))
+  component: React.lazy(() => import("../pages/PCHome"))
 }];
 
 // H5 路由配置
