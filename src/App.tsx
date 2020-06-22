@@ -31,7 +31,7 @@ const Routes: React.FC<any> = React.memo(() => {
   const routes: Array<IRoute> = useRoutesWithMedia();
   const isMobile = useIsMobile();
   return (
-    <section className={`app-route-${isMobile? "h5": "ps"}-views-container`}>
+    <section className={`app-route-${isMobile? "h5": "pc"}-views-container`}>
       {routes.map((item: IRoute) => <Route key={item.path} path={item.path} component={item.component} exact />)}
     </section>
   )
