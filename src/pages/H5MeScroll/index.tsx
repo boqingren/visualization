@@ -1,5 +1,6 @@
 import React from "react";
 import { H5Scroll } from "../../components";
+import { getPageData } from "../../services/H5MeScroll";
 import "./index.css";
 
 const H5MeScroll = React.memo(() => {

@@ -133,6 +133,10 @@ export type TUsePaginationReducer = (state: IPaginationStore, action: IAction) =
 
 export type TUsePagination = (params: ITableProps) => IUsePaginationResult | never;
 
+export interface IGetPageDataParams extends IGetTestListParams {
+
+};
+
 export interface IScrollProps {
   id?: string;
   className?: string;

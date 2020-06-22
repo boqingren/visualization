@@ -5,6 +5,7 @@ import { useScroll } from "../../hooks";
 import "./index.css";
 
 const H5Scroll = React.memo(props => {
+
   console.log("render h5 scroll components...");
   return (
     <div className="h5-scroll-components-container">
