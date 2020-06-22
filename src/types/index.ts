@@ -158,4 +158,4 @@ export interface IUseScrollResult {
 
 export type TUseScrollReducer = (state: IScrollStore, action: IAction) => IScrollStore | never;
 
-export type TUseScroll = (params: ITableProps) => IUseScrollResult | never;
+export type TUseScroll = (params: IScrollProps) => IUseScrollResult | never;

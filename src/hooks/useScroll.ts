@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useCallback } from "react";
-import { ITypes, IScrollStore, TUseScrollReducer, TUseScroll } from "../types";
+import { ITypes, IScrollStore, TUseScrollReducer, TUseScroll, IScrollProps } from "../types";
 
 const Types: ITypes = {
   SET_MESCROLL_ID: "setMescrollId",
@@ -42,7 +42,17 @@ const reducer: TUseScrollReducer = (state, action) => {
   }	
 };
 
+const getInitState: (state: IScrollStore, params: IScrollProps) => IScrollStore = (state, params) => ({
+  mescrollId: params.id || state.mescrollId,
+  pageNum: params.initNum || state.pageNum,
+  pageSize: params.pageSize || state.pageSize,
+  mescroll: state.mescroll
+});
+
 const useScroll: TUseScroll = params => {
+  const initState = getInitState(initStore, params)
+  const [ state, dispatch ] = useReducer(reducer, initState);
+
   return {
     pageNum: 0,
     pageSize: 10,
