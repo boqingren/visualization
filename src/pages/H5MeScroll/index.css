@@ -1,0 +1,9 @@
+.h5-home-page-container {
+  width: 100%;
+  height: 100%;
+}
+
+.app-route-h5-links-item {
+  display: block;
+  padding: 10px 0;
+}
