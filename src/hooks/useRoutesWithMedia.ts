@@ -1,35 +1,15 @@
-import { baseUrl } from './../configs/http';
-import React from "react";
-import { useMedia } from "react-media";
+import useIsMobile from "./useIsMobile";
+import { routes } from "../configs";
 import { IRoute } from "../types";
 
+const { COMMON_ROUTES_CONFIG, PC_ROUTES_CONFIG, H5_ROUTES_CONFIG } = routes;
+
 const useRoutesWithMedia: () => Array<IRoute> = () => {
-  const isSmallScreen = useMedia({ query: "(max-width: 599px)" });
-  return [{
-    path: "/",
-    text: isSmallScreen? "H5Home": "Home",
-    isShow: isSmallScreen? false: true,
-    isRoot: true,
-    component: React.lazy(() => import(`../pages/${isSmallScreen? "H5Home": "Home"}`))
-  }, {
-    path: "/home",
-    text: "Home",
-    isShow: true,
-    isRoot: false,
-    component: React.lazy(() => import("../pages/Home"))
-  }, {
-    path: "/about",
-    text: "About",
-    isShow: true,
-    isRoot: false,
-    component: React.lazy(() => import("../pages/About"))
-  }, {
-    path: "/hooks",
-    text: "Hooks",
-    isShow: true,
-    isRoot: false,
-    component: React.lazy(() => import("../pages/Hooks"))
-  }];
+  const isMobile = useIsMobile();
+  return [
+    ...isMobile? H5_ROUTES_CONFIG: PC_ROUTES_CONFIG,
+    ...COMMON_ROUTES_CONFIG
+  ];
 };
 
 export default useRoutesWithMedia;
