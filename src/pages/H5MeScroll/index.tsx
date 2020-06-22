@@ -1,7 +1,9 @@
 import React from "react";
 import { H5Scroll } from "../../components";
 import { getPageData } from "../../services/H5MeScroll";
+import { useScroll } from "../../hooks";
 import "./index.css";
+import { render } from "@testing-library/react";
 
 const H5MeScroll = React.memo(() => {
   console.log("render h5 mescroll page...");
