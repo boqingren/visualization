@@ -5,7 +5,7 @@
 }
 
 .h5-mescroll-page-list-header-account-container {
-  flex: 1;
+  flex: 2;
   width: 33%;
   max-width: 33%;
   text-align: left;
@@ -19,7 +19,7 @@
 }
 
 .h5-mescroll-page-list-header-number-container {
-  flex: 1;
+  flex: 2;
   width: 33%;
   max-width: 33%;
   text-align: right;
@@ -33,14 +33,26 @@
 }
 
 .h5-mescroll-page-list-item-account-container {
-  flex: 1;
+  flex: 2;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   width: 33%;
   max-width: 33%;
   text-align: left;
+}
+
+.h5-mescroll-page-list-item-account-container > span {
+  display: inline-block;
+  max-width: 100px;
   white-space: nowrap;
-  text-overflow: ellipsis;
   overflow: hidden;
-  word-break: break-all;
+  text-overflow: ellipsis;
+}
+
+.h5-mescroll-page-list-item-account-container > img {
+  margin-left: 5px;
+  height: 10px;
 }
 
 .h5-mescroll-page-list-item-status-container {
@@ -52,7 +64,7 @@
 }
 
 .h5-mescroll-page-list-item-number-container {
-  flex: 1;
+  flex: 2;
   width: 33%;
   max-width: 33%;
   text-align: right;

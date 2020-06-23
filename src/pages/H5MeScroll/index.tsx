@@ -2,6 +2,7 @@ import React from "react";
 import { H5Scroll } from "../../components";
 import { getPageData } from "../../services/H5MeScroll";
 import { useScroll } from "../../hooks";
+import editIcon from "../../images/edit.png";
 import { IUseScrollResult, IH5MeScrollPageListProps, IH5MeScrollDataListItem } from "../../types";
 import dataList from "./dataList";
 import "./index.css";
@@ -9,7 +10,10 @@ import "./index.css";
 const PageListItem: React.FC<{ item: IH5MeScrollDataListItem }> = React.memo(props => {
   return (
     <div className="h5-mescroll-page-list-item-container">
-      <div className="h5-mescroll-page-list-item-account-container">{props.item.userId}</div>
+      <div className="h5-mescroll-page-list-item-account-container">
+        <span>{props.item.userId}</span>
+        <img src={editIcon} alt="" />
+      </div>
       <div className="h5-mescroll-page-list-item-status-container">{props.item.valid}</div>
       <div className="h5-mescroll-page-list-item-number-container">{props.item.teamCount}</div>
     </div>
