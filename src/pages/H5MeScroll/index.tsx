@@ -7,6 +7,16 @@ import { IUseScrollResult, IH5MeScrollPageListProps, IH5MeScrollDataListItem } f
 import dataList from "./dataList";
 import "./index.css";
 
+const PageListHeader = React.memo(props => {
+  return (
+    <div className="h5-mescroll-page-list-header-container">
+      <div className="h5-mescroll-page-list-header-account-container">好友账号</div>
+      <div className="h5-mescroll-page-list-header-status-container">状态</div>
+      <div className="h5-mescroll-page-list-header-number-container">有效人数</div>
+    </div>
+  );
+});
+
 const PageListItem: React.FC<{ item: IH5MeScrollDataListItem }> = React.memo(props => {
   return (
     <div className="h5-mescroll-page-list-item-container">
@@ -14,18 +24,10 @@ const PageListItem: React.FC<{ item: IH5MeScrollDataListItem }> = React.memo(pro
         <span>{props.item.userId}</span>
         <img src={editIcon} alt="" />
       </div>
-      <div className="h5-mescroll-page-list-item-status-container">{props.item.valid}</div>
+      <div className="h5-mescroll-page-list-item-status-container">
+        {props.item.valid? "有效": "无效"}
+      </div>
       <div className="h5-mescroll-page-list-item-number-container">{props.item.teamCount}</div>
-    </div>
-  );
-});
-
-const PageListHeader = React.memo(props => {
-  return (
-    <div className="h5-mescroll-page-list-header-container">
-      <div className="h5-mescroll-page-list-header-account-container">好友账号</div>
-      <div className="h5-mescroll-page-list-header-status-container">状态</div>
-      <div className="h5-mescroll-page-list-header-number-container">有效人数</div>
     </div>
   );
 });

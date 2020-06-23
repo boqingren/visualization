@@ -1,3 +1,10 @@
+/* h5-mescroll-page-list-container */
+.h5-mescroll-page-list-container {
+  border-radius: 12.5px;
+  background: #ffffff;
+  padding: 15px;
+}
+
 /* h5-mescroll-page-header-item-container */
 .h5-mescroll-page-list-header-container {
   display: flex;
@@ -6,16 +13,16 @@
 
 .h5-mescroll-page-list-header-account-container {
   flex: 2;
-  width: 33%;
-  max-width: 33%;
+  width: 40%;
+  max-width: 40%;
   text-align: left;
 }
 
 .h5-mescroll-page-list-header-status-container {
   flex: 1;
-  width: 33%;
-  max-width: 33%;
-  text-align: right;
+  width: 26%;
+  max-width: 26%;
+  text-align: center;
 }
 
 .h5-mescroll-page-list-header-number-container {
@@ -29,7 +36,12 @@
 /* h5-mescroll-page-list-item-container */
 .h5-mescroll-page-list-item-container {
   display: flex;
+  border-bottom: 1px #f5f5f5 solid;
+  padding: 20px 0;
   width: 100%;
+  font-size: 15px;
+  font-weight: 400;
+  color: #2a2a2a;
 }
 
 .h5-mescroll-page-list-item-account-container {
@@ -37,8 +49,8 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 33%;
-  max-width: 33%;
+  width: 40%;
+  max-width: 40%;
   text-align: left;
 }
 
@@ -57,9 +69,9 @@
 
 .h5-mescroll-page-list-item-status-container {
   flex: 1;
-  width: 33%;
-  max-width: 33%;
-  text-align: right;
+  width: 26%;
+  max-width: 26%;
+  text-align: center;
   overflow: hidden;
 }
 
