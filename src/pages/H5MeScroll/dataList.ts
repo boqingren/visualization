@@ -1,0 +1,41 @@
+export default [{
+  teamCount: 10,
+  userId: "yjphsyvjgsrcgobufckfnhyjhwwaxhkzxeifykqjrslhvkhpdo",
+  valid: true
+}, {
+  teamCount: 11,
+  userId: "bdwxqcpuurplpvtvquxmxdqofbdtybtpiytwrivxouxujgevhl",
+  valid: false
+}, {
+  teamCount: 12,
+  userId: "obrotvsweofvkqreouidilywlogfnputtlubvgwdcekufsnqqg",
+  valid: false
+}, {
+  teamCount: 13,
+  userId: "whimaocnkkatomgszckyajmndmfgxvdckbmimttfttcukbfhng",
+  valid: false
+}, {
+  teamCount: 14,
+  userId: "wxlpvhwmuessceeixnkqxmkejdqridgxepgziekwcqevjiqoje",
+  valid: true
+}, {
+  teamCount: 15,
+  userId: "zglcapkddjbxcsjlovjmiujskaqsccdljjhktxtyscxbkhrmws",
+  valid: false
+}, {
+  teamCount: 16,
+  userId: "orhyixfdthnkuwfmykpkwnmgogejqmxjtovyhvghdgccjtwpho",
+  valid: true
+}, {
+  teamCount: 17,
+  userId: "gstpahqvprufxrpgmlcruqqqpqemgkpmqhtuzrhmiuxwyouffm",
+  valid: false
+}, {
+  teamCount: 18,
+  userId: "rnaxlhhwnctlqvjtlgqgtungdjsxciewqqkesjpqwngmwtmgth",
+  valid: false
+}, {
+  teamCount: 19,
+  userId: "vhtioxdyifidjehoufduxzdeizxsumomccebkipfbsgdibvuip",
+  valid: true
+}];

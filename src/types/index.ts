@@ -164,3 +164,13 @@ export interface IUseScrollResult {
 export type TUseScrollReducer = (state: IScrollStore, action: IAction) => IScrollStore | never;
 
 export type TUseScroll = (params: IScrollProps) => IUseScrollResult | never;
+
+export interface IH5MeScrollDataListItem {
+  teamCount: number;
+  userId: string;
+  valid: boolean;
+};
+
+export interface IH5MeScrollPageListProps {
+  dataList: Array<IH5MeScrollDataListItem>;
+};
