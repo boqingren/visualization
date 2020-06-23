@@ -174,3 +174,8 @@ export interface IH5MeScrollDataListItem {
 export interface IH5MeScrollPageListProps {
   dataList: Array<IH5MeScrollDataListItem>;
 };
+
+export interface IH5HeaderProps {
+  path?: string;
+  title: string;
+}

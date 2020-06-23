@@ -1,5 +1,5 @@
 import React from "react";
-import { H5Scroll } from "../../components";
+import { H5Scroll, H5Header } from "../../components";
 import { getPageData } from "../../services/H5MeScroll";
 import { useScroll } from "../../hooks";
 import editIcon from "../../images/edit.png";
@@ -46,6 +46,7 @@ const H5MeScroll = React.memo(() => {
 
   return (
     <div className="h5-mescroll-page-container">
+      <H5Header title="我的推薦" />
       <H5Scroll
         getPageData={getPageData}
         render={store => <PageList dataList={dataList} />}

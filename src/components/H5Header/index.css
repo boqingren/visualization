@@ -1,0 +1,36 @@
+.h5-page-header-components-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  height: 25px;
+  position: fixed;
+  left: 15px;
+  right: 15px;
+  top: 15px;
+}
+
+.h5-page-header-components-rollback-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+}
+
+.h5-page-header-components-rollback-btn-container > i {
+  border: 3px solid black;
+  border-width: 0 2.5px 2.5px 0;
+  border-color: #2a2a2a;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(135deg);
+}
+
+.h5-page-header-components-title-container {
+  font-size: 17px;
+  font-family: PingFang SC Semibold, PingFang SC Semibold-Semibold;
+  font-weight: 600;
+  color: #2a2a2a;
+  letter-spacing: 0px;
+}
