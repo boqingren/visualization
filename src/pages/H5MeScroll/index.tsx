@@ -10,9 +10,9 @@ import "./index.css";
 const PageListHeader = React.memo(props => {
   return (
     <div className="h5-mescroll-page-list-header-container">
-      <div className="h5-mescroll-page-list-header-account-container">好友账号</div>
-      <div className="h5-mescroll-page-list-header-status-container">状态</div>
-      <div className="h5-mescroll-page-list-header-number-container">有效人数</div>
+      <div className="h5-mescroll-page-list-header-account-container">好友賬號</div>
+      <div className="h5-mescroll-page-list-header-status-container">狀態</div>
+      <div className="h5-mescroll-page-list-header-number-container">有效人數</div>
     </div>
   );
 });
@@ -25,7 +25,7 @@ const PageListItem: React.FC<{ item: IH5MeScrollDataListItem }> = React.memo(pro
         <img src={editIcon} alt="" />
       </div>
       <div className="h5-mescroll-page-list-item-status-container">
-        {props.item.valid? "有效": "无效"}
+        {props.item.valid? "生效": "無效"}
       </div>
       <div className="h5-mescroll-page-list-item-number-container">{props.item.teamCount}</div>
     </div>

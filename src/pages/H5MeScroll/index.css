@@ -8,7 +8,12 @@
 /* h5-mescroll-page-header-item-container */
 .h5-mescroll-page-list-header-container {
   display: flex;
+  padding-top: 20px;
+  padding-bottom: 20px;
   width: 100%;
+  font-size: 12px;
+  font-weight: 400;
+  color: #868686;
 }
 
 .h5-mescroll-page-list-header-account-container {
