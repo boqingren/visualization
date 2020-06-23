@@ -156,8 +156,8 @@ export interface IScrollStore {
 export interface IUseScrollResult {
   pageNum: number;
   pageSize: number;
-  isDown: boolean,
-  isUp: boolean,
+  isDown: boolean;
+  isUp: boolean;
   mescroll: object;
 };
 
@@ -172,7 +172,12 @@ export interface IH5MeScrollDataListItem {
 };
 
 export interface IH5MeScrollPageListProps {
+  store: IUseScrollResult;
   dataList: Array<IH5MeScrollDataListItem>;
+  isShow: boolean;
+  current: IH5MeScrollDataListItem;
+  setIsShow: (isShow: boolean) => void;
+  setCurrent: (current: IH5MeScrollDataListItem) => void;
 };
 
 export interface IH5HeaderProps {
@@ -181,5 +186,5 @@ export interface IH5HeaderProps {
 };
 
 export interface IH5WithHeaderProps extends IH5HeaderProps {
-  
+
 };

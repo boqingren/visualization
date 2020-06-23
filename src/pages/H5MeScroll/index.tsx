@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { H5Scroll, H5Header, H5WithHeader } from "../../components";
 import { getPageData } from "../../services/H5MeScroll";
 import { useScroll } from "../../hooks";
@@ -7,7 +7,7 @@ import { IUseScrollResult, IH5MeScrollPageListProps, IH5MeScrollDataListItem } f
 import dataList from "./dataList";
 import "./index.css";
 
-const PageListHeader = React.memo(props => {
+const PageListHeader = React.memo(() => {
   return (
     <div className="h5-mescroll-page-list-header-container">
       <div className="h5-mescroll-page-list-header-account-container">好友賬號</div>
@@ -42,14 +42,23 @@ const PageList: React.FC<IH5MeScrollPageListProps> = React.memo(props => {
 });
 
 const H5MeScroll = React.memo(() => {
+  const [ isShow, setIsShow ] = useState(false);
+  const [ current, setCurrent ] = useState({} as IH5MeScrollDataListItem);
+
   console.log("render h5 mescroll page...");
 
   return (
     <H5WithHeader title="我的推薦">
-      <H5Scroll
-        getPageData={getPageData}
-        render={store => <PageList dataList={dataList} />}
-      />
+      <H5Scroll getPageData={getPageData} render={store => (
+        <PageList
+          store={store}
+          dataList={dataList}
+          isShow={isShow}
+          current={current}
+          setIsShow={setIsShow}
+          setCurrent={setCurrent}
+        />
+      )}/>
     </H5WithHeader>
   );
 });
