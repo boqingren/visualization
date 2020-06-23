@@ -13,7 +13,7 @@ const H5Scroll: React.FC<IScrollProps> = React.memo(props => {
   console.log("render h5 scroll components...");
   return (
     <div className="h5-scroll-components-container">
-      {props.children}
+      {props.render(state)}
     </div>
   );
 });

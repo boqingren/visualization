@@ -143,6 +143,7 @@ export interface IScrollProps {
   initNum?: number;
   pageSize?: number;
   getPageData: (params: IUseScrollResult) => void;
+  render: (store: IUseScrollResult) => React.ReactElement;
 };
 
 export interface IScrollStore {
