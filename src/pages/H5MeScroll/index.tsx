@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ReactModal from "react-modal";
 import { H5Scroll, H5Header, H5WithHeader } from "../../components";
 import { getPageData } from "../../services/H5MeScroll";
 import { useScroll } from "../../hooks";
@@ -19,7 +20,7 @@ const PageListHeader = React.memo(() => {
 
 const PageListItem: React.FC<{ item: IH5MeScrollDataListItem }> = React.memo(props => {
   return (
-    <div className="h5-mescroll-page-list-item-container">
+    <div className="h5-mescroll-page-list-item-container" key={props.item.userId}>
       <div className="h5-mescroll-page-list-item-account-container">
         <span>{props.item.userId}</span>
         <img src={editIcon} alt="" />
