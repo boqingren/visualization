@@ -178,4 +178,8 @@ export interface IH5MeScrollPageListProps {
 export interface IH5HeaderProps {
   path?: string;
   title: string;
-}
+};
+
+export interface IH5WithHeaderProps extends IH5HeaderProps {
+  
+};
