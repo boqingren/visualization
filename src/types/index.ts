@@ -169,6 +169,7 @@ export interface IH5MeScrollDataListItem {
   teamCount: number;
   userId: string;
   valid: boolean;
+  setIsShow?: (isShow: boolean) => void;
 };
 
 export interface IH5MeScrollPageListProps {

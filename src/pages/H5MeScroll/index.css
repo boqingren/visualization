@@ -87,3 +87,41 @@
   text-align: right;
   overflow: hidden;
 }
+
+/* EditModal */
+.h5-mescroll-edit-modal-button-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+}
+
+.h5-mescroll-edit-modal-cancel-btn {
+  height: 28px;
+  padding: 0 15px;
+  font-size: 7px;
+  border-radius: 4px;
+  color: rgba(0, 0, 0, 0.65);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  outline: 0;
+}
+
+.h5-mescroll-edit-modal-confirm-btn {
+  margin-left: 8px;
+  height: 28px;
+  padding: 0 15px;
+  font-size: 7px;
+  border-radius: 4px;
+  color: rgba(0, 0, 0, 0.65);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+  border: 1px solid;
+  background-color: #1890ff;
+  border-color: #1890ff;
+  color: #fff;
+  outline: 0 !important;
+}
